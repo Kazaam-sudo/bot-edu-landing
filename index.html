@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Обучение настройке инструментов автоматизации на бирже</title>
+  <meta name="description" content="Обучение настройке инструментов автоматизации торговли на бирже — практическое руководство и видеоинструкция. Материал образовательный." />
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Обучение настройке инструментов автоматизации на бирже" />
+  <meta property="og:description" content="Практическое обучение: как работают встроенные инструменты автоматизации на криптобирже. Материал образовательный." />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <!-- можно заменить logo.svg -->
+        <img src="logo.svg" alt="logo" class="logo">
+        <div class="brand-text">
+          <div class="brand-title">Обучение автоматизации</div>
+          <div class="brand-sub">инструменты биржи — практический разбор</div>
+        </div>
+      </div>
+      <nav class="top-cta">
+        <a class="btn btn-ghost" href="#about">О курсе</a>
+        <a class="btn" id="cta-top" href="BEMOB_LINK" target="_blank" rel="noopener">Перейти к платформе</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Обучение настройке инструментов автоматизации торговли на бирже</h1>
+          <p class="lead">В этом материале — практический разбор встроенных функций автоматизации на бирже: как они работают и как настроить их самостоятельно. Материал носит образовательный характер.</p>
+          <a class="btn btn-primary" href="BEMOB_LINK" id="cta-hero" target="_blank" rel="noopener">Перейти к платформе</a>
+        </div>
+
+        <div class="hero-media">
+          <!-- Заглушка для видео: позже заменишь YOUTUBE_LINK на ссылку embed -->
+          <div class="video-wrap">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUTUBE_LINK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Видео-инструкция"></iframe>
+          </div>
+          <p class="video-note">Видео: практический пример настройки автоматизации. Смотри, повторяй и тестируй.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <h2>Что вы узнаете</h2>
+      <ul class="features">
+        <li>Какие инструменты автоматизации доступны на бирже</li>
+        <li>Как технически подключить и настроить автоматические ордера</li>
+        <li>Как управлять рисками на уровне настроек</li>
+        <li>Типичные ошибки при настройке и как их избежать</li>
+        <li>Практическая последовательность для повторения шаг за шагом</li>
+      </ul>
+
+      <div class="two-cols">
+        <div>
+          <h3>Краткая инструкция</h3>
+          <ol>
+            <li>Зарегистрируйтесь на бирже.</li>
+            <li>Откройте раздел автоматизации/стратегий.</li>
+            <li>Повторите шаги из видео (настройки ордеров, параметры, лимиты).</li>
+            <li>Тестируйте на минимальных суммах и отслеживайте логи.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Используемые инструменты</h3>
+          <p>В примере показан встроенный функционал биржи (API/стратегии/автоордера). Никаких «чёрных ящиков» — только то, что есть в интерфейсе биржи.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary wide" href="BEMOB_LINK" target="_blank" rel="noopener">Создать аккаунт и повторить</a>
+      </div>
+
+      <div class="disclaimer">
+        <strong>Дисклеймер:</strong> материал предоставляется исключительно в образовательных целях. Я не даю инвестиционных рекомендаций. Торговля криптовалютами связана с риском потери средств. Результаты не гарантируются.
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> Обучение автоматизации. Все права защищены.</div>
+        <div class="small-note">Контакты: <a href="mailto:you@example.com">you@example.com</a></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // TODO: заменить BEMOB_LINK и YOUTUBE_LINK на реальные значения
+  </script>
+</body>
+</html>
