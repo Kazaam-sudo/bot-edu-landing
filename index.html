@@ -4,266 +4,258 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gridlab Academy | Обучение сеточной стратегии</title>
-
+<title>Gridlab Academy | Сеточная стратегия</title>
 <link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
-<!-- Google Font (чистый минимализм) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --bg: #0F1115;
-  --bg-secondary: #151821;
+  --bg2: #151821;
   --accent: #22C55E;
   --text: #ffffff;
-  --text-muted: #9CA3AF;
+  --muted: #9CA3AF;
+  --border: #1F2937;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .container {
   width: 90%;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: auto;
   padding: 80px 0;
 }
 
-h1 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+h1 { font-size: 48px; margin-bottom:20px; }
+h2 { font-size: 32px; margin-bottom:25px; }
+h3 { font-size: 22px; margin-bottom:15px; }
 
-h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
+p { color: var(--muted); margin-bottom:15px; }
 
-p {
-  color: var(--text-muted);
-  font-size: 18px;
-  margin-bottom: 20px;
+.section {
+  border-top:1px solid var(--border);
 }
 
 .hero {
-  text-align: center;
-  padding-top: 120px;
-  padding-bottom: 120px;
+  text-align:center;
+  padding:120px 0;
 }
 
-.hero span {
-  color: var(--accent);
-}
+.hero span { color: var(--accent); }
 
 .btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 14px 28px;
-  background: var(--accent);
-  color: #000;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: 0.3s;
+  display:inline-block;
+  padding:14px 28px;
+  background:var(--accent);
+  color:#000;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  margin-top:20px;
+  transition:.3s;
 }
 
-.btn:hover {
-  opacity: 0.85;
+.btn:hover { opacity:.85; }
+
+.divider {
+  height:2px;
+  width:60px;
+  background:var(--accent);
+  margin:20px 0 40px 0;
 }
 
-.section {
-  padding: 100px 0;
-  border-top: 1px solid #1F2937;
+.step {
+  background:var(--bg2);
+  padding:30px;
+  border-radius:12px;
+  margin-bottom:25px;
+  border:1px solid var(--border);
 }
 
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  margin-top: 40px;
+.step-icon {
+  font-size:24px;
+  margin-right:10px;
+  color:var(--accent);
 }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
+.step-title {
+  display:flex;
+  align-items:center;
+  margin-bottom:15px;
 }
 
-.footer {
-  text-align: center;
-  padding: 60px 0;
-  border-top: 1px solid #1F2937;
-  font-size: 14px;
-  color: var(--text-muted);
+.screenshot {
+  width:100%;
+  border-radius:10px;
+  margin:20px 0;
+  border:1px solid var(--border);
 }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
+.checklist {
+  background:var(--bg2);
+  padding:30px;
+  border-radius:12px;
+  border:1px solid var(--border);
 }
 
+.checklist li {
+  margin-bottom:10px;
+  color:var(--muted);
+}
+
+.faq-item {
+  margin-bottom:20px;
+}
+
+.faq-question {
+  cursor:pointer;
+  padding:15px;
+  background:var(--bg2);
+  border-radius:8px;
+  border:1px solid var(--border);
+}
+
+.faq-answer {
+  display:none;
+  padding:15px;
+  color:var(--muted);
+}
+
+footer {
+  text-align:center;
+  padding:60px 0;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:14px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <h1>Gridlab <span>Academy</span></h1>
-    <p>Обучение настройке сеточной стратегии. Пошагово, структурировано, без сложных терминов.</p>
-    <a href="#video" class="btn">Смотреть инструкцию</a>
+    <p>Структурированное обучение настройке сеточной стратегии</p>
+    <a href="#instruction" class="btn">Начать обучение</a>
   </div>
 </section>
 
-<!-- О СТРАТЕГИИ -->
+<section class="section" id="instruction">
+<div class="container">
+
+<h2>Пошаговая инструкция</h2>
+<div class="divider"></div>
+
+<div class="step">
+  <div class="step-title">
+    <div class="step-icon">①</div>
+    <h3>Выбор актива</h3>
+  </div>
+  <p>Откройте TradingView и перейдите в раздел Crypto.</p>
+  <p>Отсортируйте активы по капитализации и выберите монету из Top 10 или Top 30.</p>
+  <p>Найдите актив в боковом движении после недавнего отката.</p>
+  <a href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank" class="btn">Открыть TradingView</a>
+  <img src="screenshot1.jpg" class="screenshot" alt="TradingView Screenshot">
+</div>
+
+<div class="step">
+  <div class="step-title">
+    <div class="step-icon">②</div>
+    <h3>Расчет диапазона 70% / 30%</h3>
+  </div>
+  <p>Берем текущую цену как точку входа.</p>
+  <p>70% вниз — нижняя граница.</p>
+  <p>30% вверх — верхняя граница.</p>
+  <p>Это рабочий диапазон для сетки.</p>
+</div>
+
+<div class="step">
+  <div class="step-title">
+    <div class="step-icon">③</div>
+    <h3>Настройка в Binance</h3>
+  </div>
+  <p>Перейдите в Binance → Trade → Grid Trading.</p>
+  <p>Введите Lower Price и Upper Price.</p>
+  <p>Установите 20–40 уровней.</p>
+  <p>Запустите с небольшой суммой.</p>
+  <a href="https://www.binance.com/" target="_blank" class="btn">Перейти к Binance</a>
+  <img src="screenshot2.jpg" class="screenshot" alt="Binance Screenshot">
+</div>
+
+</div>
+</section>
+
 <section class="section">
-  <div class="container">
-    <h2>Что такое сеточная стратегия?</h2>
-    <p>
-      Сеточная стратегия — это структурированный способ работы с колебаниями рынка.
-      Вместо попытки угадать направление движения, система работает внутри заранее заданного диапазона.
-    </p>
-    <p>
-      Бот автоматически размещает ордера на покупку и продажу,
-      фиксируя небольшие движения цены внутри диапазона.
-    </p>
-  </div>
+<div class="container">
+
+<h2>Перед запуском убедитесь</h2>
+<div class="divider"></div>
+
+<div class="checklist">
+<ul>
+<li>Актив из Top 30 по капитализации</li>
+<li>Наблюдается боковое движение или коррекция</li>
+<li>Используется спотовая торговля без плеча</li>
+<li>Капитал распределен постепенно</li>
+<li>Понимаете, что стратегия требует контроля</li>
+</ul>
+</div>
+
+</div>
 </section>
 
-  <section class="section">
-  <div class="container">
-    <h2>Пошаговая инструкция по настройке</h2>
-
-    <h3>Шаг 1. Выбор актива</h3>
-    <p>
-      1. Открываем TradingView.<br>
-      2. Переходим в раздел Crypto.<br>
-      3. Сортируем активы по рыночной капитализации (Top 10 / Top 30).<br>
-      4. Ищем монету, которая недавно выросла и сейчас находится в откате или боковом движении.<br>
-      5. Важно: избегаем активов с резким вертикальным падением без отскока.
-    </p>
-
-    <h3>Шаг 2. Определение точки входа</h3>
-    <p>
-      1. Переходим на таймфрейм 4H или 1D.<br>
-      2. Находим зону, где цена стабилизировалась после отката.<br>
-      3. Убеждаемся, что движение стало более плавным и диапазонным.
-    </p>
-
-    <h3>Шаг 3. Расчет диапазона 70% / 30%</h3>
-    <p>
-      1. Фиксируем текущую цену как точку входа.<br>
-      2. Рассчитываем нижнюю границу — 70% вниз от текущей цены.<br>
-      3. Рассчитываем верхнюю границу — 30% вверх.<br>
-      4. Это рабочий диапазон, внутри которого будет работать бот.
-    </p>
-
-    <h3>Шаг 4. Настройка сетки</h3>
-    <p>
-      1. Переходим в Binance → Trade → Grid Trading.<br>
-      2. Выбираем нужную торговую пару.<br>
-      3. Вводим Lower Price (нижняя граница).<br>
-      4. Вводим Upper Price (верхняя граница).<br>
-      5. Устанавливаем количество уровней (обычно 20–40).<br>
-      6. Вводим сумму для запуска (начинать с небольшой суммы).<br>
-      7. Нажимаем Create.
-    </p>
-
-    <h3>Шаг 5. После запуска</h3>
-    <p>
-      1. Бот автоматически размещает лимитные ордера.<br>
-      2. При снижении цены — происходит покупка.<br>
-      3. При росте — происходит продажа.<br>
-      4. В истории торгов отображаются небольшие прибыльные сделки.
-    </p>
-
-    <h3>Шаг 6. Если цена выходит за диапазон</h3>
-    <p>
-      1. Это спотовая торговля — ликвидации нет.<br>
-      2. Если цена ушла ниже нижней границы, актив остаётся на балансе.<br>
-      3. Можно запустить нового бота ниже текущей цены.<br>
-      4. При восстановлении рынка нижний бот фиксирует прибыль, верхний продолжает работу.
-    </p>
-
-    <h3>Шаг 7. Контроль стратегии</h3>
-    <p>
-      1. Раз в неделю проверяем поведение цены.<br>
-      2. Анализируем, сохраняется ли диапазон.<br>
-      3. При необходимости корректируем границы.<br>
-      4. Постепенно масштабируем капитал или открываем новые пары.
-    </p>
-
-  </div>
-</section>
-
-
-<!-- ВИДЕО -->
-<section id="video" class="section">
-  <div class="container">
-    <h2>Видео-инструкция</h2>
-    <p>Полное объяснение механики, расчётов и настройки стратегии.</p>
-
-    <div class="video-wrapper">
-      <!https://youtu.be/NZD_Mb6aquo>
-      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-  </div>
-</section>
-
-<!-- КАК РАБОТАЕТ -->
 <section class="section">
-  <div class="container">
-    <h2>Как это работает</h2>
-    <p>
-      1. Выбирается ликвидный актив из топ-рынка.<br>
-      2. Определяется рабочий диапазон по правилу 70% вниз и 30% вверх.<br>
-      3. Диапазон делится на уровни.<br>
-      4. Бот автоматически совершает сделки внутри диапазона.
-    </p>
-    <p>
-      Стратегия рассчитана на дисциплину, контроль и регулярную оценку условий рынка.
-    </p>
-  </div>
+<div class="container">
+
+<h2>FAQ</h2>
+<div class="divider"></div>
+
+<div class="faq-item">
+<div class="faq-question">Что если цена выйдет за диапазон?</div>
+<div class="faq-answer">
+Это спотовая торговля. Ликвидации нет. Можно открыть нового бота ниже.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Сколько уровней использовать?</div>
+<div class="faq-answer">
+Обычно 20–40 уровней. При высокой волатильности можно больше.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Подходит ли стратегия новичкам?</div>
+<div class="faq-answer">
+Да, если понимать механику и начинать с небольших сумм.
+</div>
+</div>
+
+</div>
 </section>
 
-<!-- ДИСКЛЕЙМЕР -->
-<section class="section">
-  <div class="container">
-    <h2>Важно</h2>
-    <p>
-      Материал носит образовательный характер.
-      Любые решения принимаются самостоятельно с учётом личного понимания рисков.
-    </p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  © 2026 Gridlab Academy<br>
-  <a href="#">Политика конфиденциальности</a> |
-  <a href="#">Условия использования</a>
+<footer>
+© 2026 Gridlab Academy
 </footer>
+
+<script>
+document.querySelectorAll(".faq-question").forEach(q => {
+  q.addEventListener("click", () => {
+    const answer = q.nextElementSibling;
+    answer.style.display = answer.style.display === "block" ? "none" : "block";
+  });
+});
+</script>
 
 </body>
 </html>
