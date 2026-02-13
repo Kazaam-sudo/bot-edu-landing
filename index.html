@@ -1,100 +1,202 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Обучение настройке инструментов автоматизации на бирже</title>
-  <meta name="description" content="Обучение настройке инструментов автоматизации торговли на бирже — практическое руководство и видеоинструкция. Материал образовательный." />
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Open Graph -->
-  <meta property="og:title" content="Обучение настройке инструментов автоматизации на бирже" />
-  <meta property="og:description" content="Практическое обучение: как работают встроенные инструменты автоматизации на криптобирже. Материал образовательный." />
-  <meta property="og:type" content="website" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gridlab Academy | Обучение сеточной стратегии</title>
+
+<link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
+
+<!-- Google Font (чистый минимализм) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0F1115;
+  --bg-secondary: #151821;
+  --accent: #22C55E;
+  --text: #ffffff;
+  --text-muted: #9CA3AF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+p {
+  color: var(--text-muted);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero {
+  text-align: center;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.hero span {
+  color: var(--accent);
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.section {
+  padding: 100px 0;
+  border-top: 1px solid #1F2937;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.footer {
+  text-align: center;
+  padding: 60px 0;
+  border-top: 1px solid #1F2937;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+</style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <!-- можно заменить logo.svg -->
-        <img src="logo.svg" alt="logo" class="logo">
-        <div class="brand-text">
-          <div class="brand-title">Обучение автоматизации</div>
-          <div class="brand-sub">инструменты биржи — практический разбор</div>
-        </div>
-      </div>
-      <nav class="top-cta">
-        <a class="btn btn-ghost" href="#about">О курсе</a>
-        <a class="btn" id="cta-top" href="BEMOB_LINK" target="_blank" rel="noopener">Перейти к платформе</a>
-      </nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Gridlab <span>Academy</span></h1>
+    <p>Обучение настройке сеточной стратегии. Пошагово, структурировано, без сложных терминов.</p>
+    <a href="#video" class="btn">Смотреть инструкцию</a>
+  </div>
+</section>
+
+<!-- О СТРАТЕГИИ -->
+<section class="section">
+  <div class="container">
+    <h2>Что такое сеточная стратегия?</h2>
+    <p>
+      Сеточная стратегия — это структурированный способ работы с колебаниями рынка.
+      Вместо попытки угадать направление движения, система работает внутри заранее заданного диапазона.
+    </p>
+    <p>
+      Бот автоматически размещает ордера на покупку и продажу,
+      фиксируя небольшие движения цены внутри диапазона.
+    </p>
+  </div>
+</section>
+
+<!-- ВИДЕО -->
+<section id="video" class="section">
+  <div class="container">
+    <h2>Видео-инструкция</h2>
+    <p>Полное объяснение механики, расчётов и настройки стратегии.</p>
+
+    <div class="video-wrapper">
+      <!-- ВСТАВЬ СЮДА СВОЮ ССЫЛКУ -->
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        allowfullscreen>
+      </iframe>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1>Обучение настройке инструментов автоматизации торговли на бирже</h1>
-          <p class="lead">В этом материале — практический разбор встроенных функций автоматизации на бирже: как они работают и как настроить их самостоятельно. Материал носит образовательный характер.</p>
-          <a class="btn btn-primary" href="BEMOB_LINK" id="cta-hero" target="_blank" rel="noopener">Перейти к платформе</a>
-        </div>
+  </div>
+</section>
 
-        <div class="hero-media">
-          <!-- Заглушка для видео: позже заменишь YOUTUBE_LINK на ссылку embed -->
-          <div class="video-wrap">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUTUBE_LINK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Видео-инструкция"></iframe>
-          </div>
-          <p class="video-note">Видео: практический пример настройки автоматизации. Смотри, повторяй и тестируй.</p>
-        </div>
-      </div>
-    </section>
+<!-- КАК РАБОТАЕТ -->
+<section class="section">
+  <div class="container">
+    <h2>Как это работает</h2>
+    <p>
+      1. Выбирается ликвидный актив из топ-рынка.<br>
+      2. Определяется рабочий диапазон по правилу 70% вниз и 30% вверх.<br>
+      3. Диапазон делится на уровни.<br>
+      4. Бот автоматически совершает сделки внутри диапазона.
+    </p>
+    <p>
+      Стратегия рассчитана на дисциплину, контроль и регулярную оценку условий рынка.
+    </p>
+  </div>
+</section>
 
-    <section id="about" class="section container">
-      <h2>Что вы узнаете</h2>
-      <ul class="features">
-        <li>Какие инструменты автоматизации доступны на бирже</li>
-        <li>Как технически подключить и настроить автоматические ордера</li>
-        <li>Как управлять рисками на уровне настроек</li>
-        <li>Типичные ошибки при настройке и как их избежать</li>
-        <li>Практическая последовательность для повторения шаг за шагом</li>
-      </ul>
+<!-- ДИСКЛЕЙМЕР -->
+<section class="section">
+  <div class="container">
+    <h2>Важно</h2>
+    <p>
+      Материал носит образовательный характер.
+      Любые решения принимаются самостоятельно с учётом личного понимания рисков.
+    </p>
+  </div>
+</section>
 
-      <div class="two-cols">
-        <div>
-          <h3>Краткая инструкция</h3>
-          <ol>
-            <li>Зарегистрируйтесь на бирже.</li>
-            <li>Откройте раздел автоматизации/стратегий.</li>
-            <li>Повторите шаги из видео (настройки ордеров, параметры, лимиты).</li>
-            <li>Тестируйте на минимальных суммах и отслеживайте логи.</li>
-          </ol>
-        </div>
-        <div>
-          <h3>Используемые инструменты</h3>
-          <p>В примере показан встроенный функционал биржи (API/стратегии/автоордера). Никаких «чёрных ящиков» — только то, что есть в интерфейсе биржи.</p>
-        </div>
-      </div>
+<!-- FOOTER -->
+<footer class="footer">
+  © 2026 Gridlab Academy<br>
+  <a href="#">Политика конфиденциальности</a> |
+  <a href="#">Условия использования</a>
+</footer>
 
-      <div class="cta-row">
-        <a class="btn btn-primary wide" href="BEMOB_LINK" target="_blank" rel="noopener">Создать аккаунт и повторить</a>
-      </div>
-
-      <div class="disclaimer">
-        <strong>Дисклеймер:</strong> материал предоставляется исключительно в образовательных целях. Я не даю инвестиционных рекомендаций. Торговля криптовалютами связана с риском потери средств. Результаты не гарантируются.
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div>© <span id="year"></span> Обучение автоматизации. Все права защищены.</div>
-        <div class="small-note">Контакты: <a href="mailto:you@example.com">you@example.com</a></div>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // TODO: заменить BEMOB_LINK и YOUTUBE_LINK на реальные значения
-  </script>
 </body>
 </html>
