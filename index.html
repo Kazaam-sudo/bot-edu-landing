@@ -6,6 +6,15 @@
 <title>Gridlab Academy — Guía paso a paso (Grid Bot)</title>
 <link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
+<!-- Open Graph / Social (update og:url to your real domain after deploy) -->
+<meta name="description" content="Guía paso a paso para configurar un Bot Grid en Binance. Contenido educativo. No es asesoría financiera.">
+<meta property="og:title" content="Gridlab Academy — Guía Bot Grid" />
+<meta property="og:description" content="Aprende a configurar un Bot Grid en Binance: selección de activo, cálculo del rango 70%/30%, configuración y control." />
+<meta property="og:image" content="screenshot1.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://YOURUSERNAME.github.io/YOURREPO/" />
+<meta name="twitter:card" content="summary_large_image" />
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -49,7 +58,7 @@ body{
   gap:12px;
   align-items:center;
   justify-content:space-between;
-  padding:16px 0;
+  padding:12px 0;
 }
 .brand{display:flex;gap:12px;align-items:center}
 .logo-box{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#0F1115 0%, #0B0E13 100%);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
@@ -104,11 +113,9 @@ body{
 .section h2{font-size:20px;margin-bottom:8px}
 .divider{height:3px;width:64px;background:var(--accent);border-radius:6px;margin:12px 0 18px 0}
 
-/* Steps layout: grid for tablet+, single col mobile */
+/* Steps layout: single col mobile, two cols desktop */
 .steps{display:grid;grid-template-columns:1fr;gap:14px}
-@media (min-width:980px){
-  .steps{grid-template-columns:repeat(2,1fr)}
-}
+@media (min-width:980px){ .steps{grid-template-columns:repeat(2,1fr)} }
 
 /* Step card */
 .step-card{
@@ -154,10 +161,17 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
 }
 .lightbox img{max-width:100%;max-height:96vh;border-radius:10px}
 
-/* small responsiveness tweaks */
+/* Popup modal */
+.popup-wrapper{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:10000;padding:20px}
+.popup{width:100%;max-width:480px;background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(2,6,23,0.12)}
+.popup h3{margin-bottom:8px}
+.popup p{color:var(--muted);margin-bottom:12px}
+.popup .actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* small tweaks */
 @media (max-width:480px){
-  .btn{font-size:13px;padding:10px 12px}
-  .hero h1{font-size:22px}
+  .btn{font-size:13px;padding:9px 10px}
+  .hero h1{font-size:20px}
   .step-title{font-size:15px}
 }
 </style>
@@ -185,8 +199,9 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
     </div>
 
     <div class="cta" role="navigation" aria-label="Navegación principal">
-      <a class="btn" href="#instruction">Empezar</a>
-      <a class="btn secondary" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank" rel="noopener">Abrir TradingView</a>
+      <!-- Referral button added to top -->
+      <a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Registrarse en Binance</a>
+      <a class="btn secondary" href="#instruction">Empezar</a>
     </div>
   </header>
 
@@ -333,7 +348,7 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
         </ol>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Ir a Binance</a>
+          <a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Ir a Binance (ref)</a>
           <a class="btn secondary" href="https://www.tradingview.com/chart/" target="_blank" rel="noopener">Abrir gráfico (TradingView)</a>
         </div>
 
@@ -400,7 +415,7 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
 
   <!-- CHECKLIST -->
   <section class="section" aria-labelledby="checklist-title">
-    <div class="container" style="padding:0">
+    <div style="padding:0">
       <h2 id="checklist-title">Antes de iniciar — verifique</h2>
       <div class="divider" aria-hidden="true"></div>
 
@@ -417,7 +432,7 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
 
   <!-- FAQ -->
   <section class="section" aria-labelledby="faq-title">
-    <div class="container" style="padding:0">
+    <div style="padding:0">
       <h2 id="faq-title">FAQ — Preguntas frecuentes</h2>
       <div class="divider" aria-hidden="true"></div>
 
@@ -437,8 +452,9 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer with referral -->
   <footer class="footer" role="contentinfo">
+    <div style="margin-bottom:8px"><a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Registrarse en Binance</a></div>
     © 2026 Gridlab Academy — Contenido educativo. No constituye asesoría financiera.
   </footer>
 </div>
@@ -446,6 +462,18 @@ ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <img id="lightbox-img" alt="Imagen ampliada">
+</div>
+
+<!-- Popup (appears after 12s) -->
+<div class="popup-wrapper" id="popup" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <h3 id="popup-title">¿Listo para probar?</h3>
+    <p>Regístrate en Binance con nuestro enlace y comienza con una prueba. Material educativo y guía paso a paso disponible en la página.</p>
+    <div class="actions" style="display:flex;gap:10px;justify-content:flex-end">
+      <button id="popup-close" class="btn secondary" style="background:#fff;border:1px solid var(--border)">Cerrar</button>
+      <a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Ir a Binance (ref)</a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -488,6 +516,26 @@ document.addEventListener('keydown', (e)=>{
     lightbox.setAttribute('aria-hidden','true');
   }
 });
+
+/* Popup logic: show after 12 seconds, only once per session (sessionStorage) */
+const popup = document.getElementById('popup');
+const popupClose = document.getElementById('popup-close');
+function showPopup(){
+  if(sessionStorage.getItem('gridlab_popup_shown')) return;
+  popup.style.display = 'flex';
+  popup.setAttribute('aria-hidden','false');
+  sessionStorage.setItem('gridlab_popup_shown','1');
+}
+popupClose.addEventListener('click', ()=> {
+  popup.style.display = 'none';
+  popup.setAttribute('aria-hidden','true');
+});
+popup.addEventListener('click', (e)=>{
+  if(e.target === popup) { popup.style.display = 'none'; popup.setAttribute('aria-hidden','true'); }
+});
+
+/* show popup after 12s (12000 ms) */
+setTimeout(showPopup, 12000);
 
 /* Prevent horizontal scroll on iOS due to focus outlines */
 document.addEventListener('touchmove', function(){}, {passive:true});
