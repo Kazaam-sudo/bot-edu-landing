@@ -1,473 +1,302 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Gridlab Academy — Пошаговая инструкция по сеточной стратегии</title>
-<link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gridlab Academy — Сеточная стратегия</title>
+<link rel="icon" href="gridlab_academy_favicon.ico">
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg: #ffffff;
-  --card: #f7f8fa;
-  --text: #0F1115;
-  --muted: #6B7280;
-  --accent: #22C55E;
-  --border: #E6E9EE;
-  --shadow: 0 6px 18px rgba(15,17,21,0.06);
-  --radius: 12px;
-  --maxw: 1100px;
+  --accent:#22C55E;
+  --text:#0F1115;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --bg:#ffffff;
+  --card:#F9FAFB;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+}
+
 body{
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family:'Inter',sans-serif;
   background:var(--bg);
   color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   line-height:1.6;
 }
 
 .container{
   width:92%;
-  max-width:var(--maxw);
+  max-width:1100px;
   margin:0 auto;
   padding:40px 0;
 }
 
-/* HERO */
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:28px 0;
+h1{
+  font-size:36px;
+  margin-bottom:15px;
 }
-.brand {
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-.logo-box{
-  width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#0F1115 0%, #0B0E13 100%);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);
-}
-.logo-box svg { width:30px;height:30px; }
-.title{
-  font-size:18px;font-weight:700;letter-spacing:0.2px;
-}
-.subtitle{font-size:13px;color:var(--muted);margin-top:3px}
 
-/* Top CTA */
-.cta{
-  display:flex;gap:12px;align-items:center;
+h2{
+  font-size:26px;
+  margin-bottom:15px;
 }
+
+p{
+  color:var(--muted);
+  margin-bottom:15px;
+}
+
 .btn{
-  background:var(--accent);color:#000;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:none;cursor:pointer;
-  box-shadow: 0 6px 18px rgba(34,197,94,0.18);
+  display:inline-block;
+  background:var(--accent);
+  color:#000;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:600;
+  text-decoration:none;
+  margin-top:10px;
 }
+
 .btn.secondary{
-  background:transparent;color:var(--text);border:1px solid var(--border);padding:9px 14px;border-radius:10px;
-}
-.small{font-size:14px}
-
-/* Hero block */
-.hero{
-  display:grid;
-  grid-template-columns: 1fr 460px;
-  gap:28px;
-  align-items:center;
-  padding:28px 0 40px 0;
-}
-@media (max-width:980px){
-  .hero{grid-template-columns: 1fr; padding:20px 0}
-}
-
-/* hero text */
-.hero h1{font-size:40px;line-height:1.05;margin-bottom:10px}
-.hero p{color:var(--muted);font-size:16px;margin-bottom:18px}
-
-/* card */
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:18px;
+  background:#fff;
   border:1px solid var(--border);
-  box-shadow:var(--shadow);
+  color:var(--text);
 }
 
-/* video */
+.hero{
+  text-align:center;
+  padding:60px 0;
+}
+
 .video-wrapper{
-  position:relative;padding-bottom:56.25%;height:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);
+  position:relative;
+  padding-bottom:56.25%;
+  height:0;
+  overflow:hidden;
+  border-radius:12px;
+  margin-top:20px;
 }
-.video-wrapper iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
 
-/* sections */
-.section{margin-top:28px;padding:30px 0;border-top:1px solid var(--border)}
-.section h2{font-size:26px;margin-bottom:10px}
-.divider{height:3px;width:64px;background:var(--accent);border-radius:6px;margin:14px 0 24px 0}
-
-/* steps layout */
-.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media (max-width:980px){.steps{grid-template-columns:1fr}}
-.step-card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:18px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
-.step-header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-.step-icon{
-  width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04));display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;font-size:16px;
+.video-wrapper iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
 }
-.step-title{font-weight:600;font-size:18px}
 
-/* detailed ordered list */
-ol.detailed{margin-left:18px;color:var(--text);margin-bottom:12px}
-ol.detailed li{margin-bottom:10px}
-ol.sub{margin-left:14px;color:var(--muted)}
-
-/* screenshots */
-.screens{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;
+.section{
+  padding:50px 0;
+  border-top:1px solid var(--border);
 }
-@media (max-width:980px){.screens{grid-template-columns:repeat(1,1fr)}}
-.screens img{width:100%;height:200px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
 
-/* checklist */
-.checklist{display:flex;flex-direction:column;gap:10px;padding:14px;background:#fff;border-radius:10px;border:1px solid var(--border)}
-.checklist li{list-style: none;padding-left:28px;position:relative;color:var(--text)}
-.checklist li:before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;background:var(--accent);border-radius:4px}
+.step{
+  background:var(--card);
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+  border:1px solid var(--border);
+}
 
-/* FAQ */
-.faq .q{background:#fff;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq .a{display:none;padding:12px;color:var(--muted);border-left:3px solid var(--accent);background:#fbfcfd;border-radius:6px;margin-bottom:12px}
+.step-title{
+  font-weight:600;
+  margin-bottom:10px;
+}
 
-/* footer */
-.footer{padding:30px 0;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:30px}
+.screenshot{
+  width:100%;
+  max-width:100%;
+  height:auto;
+  border-radius:8px;
+  margin-top:10px;
+  cursor:pointer;
+}
 
-/* small helpers */
-.kv{display:inline-block;padding:6px 10px;border-radius:8px;background:#fff;border:1px solid var(--border);font-size:13px;color:var(--muted);margin-left:8px}
-.link{color:var(--accent);text-decoration:none}
-.center{display:flex;justify-content:center}
+.caption{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.checklist li{
+  margin-bottom:8px;
+}
+
+.faq-item{
+  margin-bottom:10px;
+}
+
+.faq-question{
+  cursor:pointer;
+  background:var(--card);
+  padding:12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+}
+
+.faq-answer{
+  display:none;
+  padding:10px;
+  color:var(--muted);
+}
+
+footer{
+  text-align:center;
+  padding:40px 0;
+  font-size:14px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-  <!-- Header -->
-  <header class="header">
-    <div class="brand">
-      <div class="logo-box">
-        <!-- small grid icon -->
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="8" height="8" fill="#FFFFFF"/>
-          <rect x="13" y="3" width="8" height="8" fill="#22C55E"/>
-          <rect x="3" y="13" width="8" height="8" fill="#22C55E"/>
-          <rect x="13" y="13" width="8" height="8" fill="#FFFFFF"/>
-        </svg>
-      </div>
-      <div>
-        <div class="title">Gridlab <span style="color:var(--accent)">Academy</span></div>
-        <div class="subtitle">Пошаговые руководства по сеточной торговле</div>
-      </div>
-    </div>
+<section class="hero">
+<h1>Guía paso a paso para configurar un Bot Grid</h1>
+<p>Explicación estructurada para trabajar con la volatilidad del mercado.</p>
+<a class="btn" href="#video">Ver video</a>
+</section>
 
-    <div class="cta">
-      <a class="btn small" href="#instruction">Начать</a>
-      <a class="btn secondary small" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank">Открыть TradingView</a>
-    </div>
-  </header>
+<section id="video" class="section">
+<h2>Video explicativo</h2>
+<div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" allowfullscreen></iframe>
+</div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h1>Пошаговая инструкция по настройке сеточного бота (Grid) на Binance</h1>
-      <p>Подробное руководство: выбор актива, расчёт диапазона 70%/30%, настройка сетки, мониторинг и действия при выходе за границы. Понятно новичку, полезно практикующему.</p>
-      <div style="margin-top:18px;">
-        <a class="btn" href="#video-block">Смотреть видео-инструкцию</a>
-        <a class="btn secondary" href="#instruction" style="margin-left:10px">Пошаговая инструкция</a>
-      </div>
-    </div>
+<section class="section">
+<h2>Paso 1 — Selección del activo</h2>
+<div class="step">
+<ol>
+<li>Abrimos TradingView → sección Crypto.</li>
+<li>Ordenamos por capitalización → Top 10–30.</li>
+<li>Buscamos una moneda con corrección reciente.</li>
+</ol>
+<img src="screenshot1.jpg" class="screenshot">
+<div class="caption">Selección del activo en TradingView.</div>
+<a class="btn secondary" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank">Abrir TradingView</a>
+</div>
+</section>
 
-    <aside class="card">
-      <div style="font-weight:600;margin-bottom:8px">Быстрый чеклист</div>
-      <ul style="list-style:none;padding-left:0;color:var(--muted);font-size:14px">
-        <li>• Актив: Top 10–30</li>
-        <li>• Диапазон: 70% вниз / 30% вверх</li>
-        <li>• Уровни: 20–40</li>
-        <li>• Начинать с небольшой суммы</li>
-      </ul>
-      <div style="margin-top:14px" class="center">
-        <a class="btn" href="https://www.binance.com/" target="_blank">Перейти к Binance</a>
-      </div>
-    </aside>
-  </section>
+<section class="section">
+<h2>Paso 2 — Punto de entrada</h2>
+<div class="step">
+<ol>
+<li>Abrimos temporalidad 4H o 1D.</li>
+<li>Identificamos estabilización tras la corrección.</li>
+<li>Tomamos el precio actual como referencia.</li>
+</ol>
+<img src="screenshot2.jpg" class="screenshot">
+<div class="caption">Ejemplo de corrección y rango lateral.</div>
+</div>
+</section>
 
-  <!-- VIDEO -->
-  <section id="video-block" class="section">
-    <div class="container">
-      <h2>Видео-инструкция</h2>
-      <div class="divider"></div>
+<section class="section">
+<h2>Paso 3 — Configuración en Binance</h2>
+<div class="step">
+<ol>
+<li>Entramos a Binance → Grid Trading.</li>
+<li>Definimos rango 70% abajo / 30% arriba.</li>
+<li>Elegimos 20–40 niveles.</li>
+<li>Iniciamos con monto pequeño.</li>
+</ol>
+<img src="screenshot3.jpg" class="screenshot">
+<div class="caption">Configuración del bot Grid en Binance.</div>
+<a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank">
+Ir a Binance
+</a>
+</div>
+</section>
 
-      <div class="card">
-        <div class="video-wrapper">
-          <!-- embedded your video -->
-          <iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" title="Grid Strategy Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
+<section class="section">
+<h2>Antes de iniciar verifica</h2>
+<ul class="checklist">
+<li>Activo dentro del Top 30.</li>
+<li>Movimiento lateral o corrección reciente.</li>
+<li>Trading Spot sin apalancamiento.</li>
+<li>Capital distribuido progresivamente.</li>
+</ul>
+</section>
 
-    </div>
-  </section>
+<section class="section">
+<h2>FAQ</h2>
 
-  <!-- INSTRUCTION -->
-  <section id="instruction" class="section">
-    <div class="container">
-      <h2>Подробная пошаговая инструкция</h2>
-      <div class="divider"></div>
-
-      <p style="color:var(--muted);margin-bottom:18px">
-        Ниже — подробная последовательность действий от выбора актива до запуска бота и дальнейших операций. Каждый шаг дробим на простые задачи — делай по чек-листу.
-      </p>
-
-      <div class="steps">
-
-        <!-- STEP 1 -->
-<div class="step-card">
-  <div class="step-header">
-    <div class="step-icon">1</div>
-    <div>
-      <div class="step-title">Поиск и выбор актива</div>
-      <div style="color:var(--muted);font-size:13px">TradingView → Top 30</div>
-    </div>
-  </div>
-
-  <ol class="detailed">
-    <li>Открываем TradingView → раздел Crypto.</li>
-    <li>Сортируем по Market Cap и выбираем актив из Top 10–30.</li>
-    <li>Проверяем объёмы торгов — ликвидность должна быть стабильной.</li>
-    <li>Ищем актив, который недавно скорректировался после роста.</li>
-  </ol>
-
-  <img src="screenshot1.jpg" class="screenshot" alt="Выбор актива в TradingView">
+<div class="faq-item">
+<div class="faq-question">¿Qué pasa si el precio sale del rango?</div>
+<div class="faq-answer">En Spot no existe liquidación. Puedes abrir un nuevo bot más abajo.</div>
 </div>
 
-
-       <!-- STEP 2 -->
-<div class="step-card">
-  <div class="step-header">
-    <div class="step-icon">2</div>
-    <div>
-      <div class="step-title">Определение точки входа и таймфрейма</div>
-      <div style="color:var(--muted);font-size:13px">TF 4H / 1D</div>
-    </div>
-  </div>
-
-  <ol class="detailed">
-    <li>Открываем график выбранной пары.</li>
-    <li>Ставим таймфрейм 4H и проверяем 1D для общей картины.</li>
-    <li>Ищем откат после роста и стабилизацию.</li>
-    <li>Фиксируем текущую цену как потенциальную точку входа.</li>
-  </ol>
-
-  <img src="screenshot2.jpg" class="screenshot" alt="График с откатом и боковиком">
+<div class="faq-item">
+<div class="faq-question">¿Cuántos niveles usar?</div>
+<div class="faq-answer">Entre 20 y 40 niveles es un buen punto de partida.</div>
 </div>
 
+</section>
 
-        <!-- STEP 3 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">3</div>
-            <div>
-              <div class="step-title">Расчёт диапазона 70% / 30%</div>
-              <div style="color:var(--muted);font-size:13px">Простой расчёт — без индикаторов</div>
-            </div>
-          </div>
+<footer>
+© 2026 Gridlab Academy — Material educativo.
+</footer>
 
-          <ol class="detailed">
-            <li>Фиксируем текущую цену как <strong>Entry</strong> (например, 1000).</li>
-            <li>Вычисляем Lower = Entry × 0.30 (т.е. 70% вниз) → 1000 × 0.30 = 300.</li>
-            <li>Вычисляем Upper = Entry × 1.30 (т.е. 30% вверх) → 1000 × 1.30 = 1300.</li>
-            <li>Проверяем: диапазон [Lower, Upper] логично покрывает предыдущие уровни поддержки/сопротивления на графике.</li>
-            <li>Если верх/низ оказываются нерелевантными (слишком узко/широко) — корректируем вручную, ориентируясь на ближайшие видимые уровни.</li>
-          </ol>
-
-          <p style="color:var(--muted);font-size:14px;margin-top:8px">
-            Пример: entry 1000 → lower 300 → upper 1300. Разумеется, всегда проверяй реальную картину на графике и объёме.
-          </p>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">4</div>
-            <div>
-              <div class="step-title">Расчёт количества уровней и шага</div>
-              <div style="color:var(--muted);font-size:13px">Рекомендуем 20–40 уровней</div>
-            </div>
-          </div>
-
-          <ol class="detailed">
-            <li>Выбрали диапазон [Lower, Upper].</li>
-            <li>Определяем количество уровней — стартовый ориентир = 30.</li>
-            <li>Шаг = (Upper − Lower) / levels → шаг в цене между ячейками.</li>
-            <li>Проверяем минимальный ордер биржи — если шаг слишком маленький (биржа не позволяет), уменьшаем уровни.</li>
-            <li>Рассчитываем сумму на одну ячейку: сумма_старт / levels (пример: 300 USDT / 30 = 10 USDT на уровень).</li>
-          </ol>
-
-          <p style="color:var(--muted);font-size:14px;margin-top:8px">
-            Совет: для новичка — начать с 20–30 уровней и маленькой суммы, чтобы понять динамику.
-          </p>
-        </div>
-
-        <!-- STEP 5 -->
-<div class="step-card">
-  <div class="step-header">
-    <div class="step-icon">5</div>
-    <div>
-      <div class="step-title">Настройка в Binance (практика)</div>
-      <div style="color:var(--muted);font-size:13px">Binance → Grid Trading</div>
-    </div>
-  </div>
-
-  <ol class="detailed">
-    <li>Заходим в Binance → Trade → Grid Trading.</li>
-    <li>Выбираем торговую пару (например BTC/USDT).</li>
-    <li>Вводим Lower Price и Upper Price.</li>
-    <li>Устанавливаем 20–40 уровней.</li>
-    <li>Вводим сумму и запускаем бота.</li>
-  </ol>
-
-  <div style="margin-top:12px">
-    <a class="btn" href="https://www.binance.com/" target="_blank">Перейти к Binance</a>
-  </div>
-
-  <img src="screenshot3.jpg" class="screenshot" alt="Настройка Grid в Binance">
 </div>
 
-
-        <!-- STEP 6 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">6</div>
-            <div>
-              <div class="step-title">Первый запуск — что смотреть</div>
-              <div style="color:var(--muted);font-size:13px">Мониторинг — первые 24–72 часа</div>
-            </div>
-          </div>
-
-          <ol class="detailed">
-            <li>После запуска: отслеживаем историю ордеров и P/L в интерфейсе бота.</li>
-            <li>Смотрим, с какой частотой срабатывают ячейки и есть ли ошибки исполнения.</li>
-            <li>Проверяем, что каждая покупка/продажа соответствует рассчитанному шагу.</li>
-            <li>Если видим частые ошибки (минимуm order issues) — корректируем шаг или количество уровней.</li>
-          </ol>
-        </div>
-
-        <!-- STEP 7 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">7</div>
-            <div>
-              <div class="step-title">Действия при выходе цены за диапазон</div>
-              <div style="color:var(--muted);font-size:13px">Стандартная "лесенка" — запуск нового бота ниже</div>
-            </div>
-          </div>
-
-          <ol class="detailed">
-            <li>Если цена ушла ниже Lower: никакой ликвидации — у вас остаётся актив в портфеле.</li>
-            <li>Рассматриваем запуск второго бота ниже текущей цены (например, на новых границах по тому же правилу 70/30).</li>
-            <li>Когда рынок восстановится — нижний бот может зафиксировать прибыль; верхний бот вернётся к работе.</li>
-            <li>Всегда оцениваем, нет ли фундаментальных причин (новости), которые могут продлить падение.</li>
-          </ol>
-        </div>
-
-        <!-- STEP 8 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">8</div>
-            <div>
-              <div class="step-title">Контроль, аудит и масштабирование</div>
-              <div style="color:var(--muted);font-size:13px">План действий на неделю/месяц</div>
-            </div>
-          </div>
-
-          <ol class="detailed">
-            <li>Еженедельно проверяй: сохраняется ли диапазон и поведение актива.</li>
-            <li>Если стратегия стабильно приносит результат — можно постепенно увеличивать сумму или открывать боты на других парах.</li>
-            <li>Диверсифицируй: не держи весь капитал в одном активе/одном диапазоне.</li>
-            <li>Веди простую таблицу (дата | пара | lower/upper | levels | старт | результат) — это поможет увидеть закономерности.</li>
-          </ol>
-        </div>
-
-      </div> <!-- /steps -->
-
-    </div>
-  </section>
-
-  <!-- CHECKLIST -->
-  <section class="section">
-    <div class="container">
-      <h2>Перед запуском убедитесь</h2>
-      <div class="divider"></div>
-
-      <div class="checklist card" style="padding:18px">
-        <li>Актив выбран из Top 10–30 по капитализации</li>
-        <li>Проверили объёмы — нет резкого падения ликвидности</li>
-        <li>Диапазон рассчитан по правилу 70%/30% и подтверждён визуально на графике</li>
-        <li>Проверили минимальный размер ордера на бирже</li>
-        <li>Запускаем сначала маленькую тестовую сумму</li>
-        <li>Имеется резерв ликвидности на случай перезапуска ботов</li>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section">
-    <div class="container">
-      <h2>FAQ — Частые вопросы</h2>
-      <div class="divider"></div>
-
-      <div class="faq">
-        <div class="q">Что если цена уйдет ниже Lower?</div>
-        <div class="a">Это спотовая торговля — ликвидации нет. Можно открыть нового бота ниже или держать актив до восстановления.</div>
-
-        <div class="q">Сколько уровней ставить?</div>
-        <div class="a">Обычный диапазон — 20–40 уровней. Начните с 20–30 и тестируйте.</div>
-
-        <div class="q">Подходит ли это для новичков?</div>
-        <div class="a">Да, при условии, что вы тестируете с небольшой суммой и понимаете риски. Не используйте плечо.</div>
-
-        <div class="q">Нужно ли мониторить новости?</div>
-        <div class="a">Да. Важные новости могут изменить структуру рынка — проверяйте перед запуском и при существенных изменениях.</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    © 2026 Gridlab Academy — обучающий материал. Не является инвестиционной рекомендацией.
-  </footer>
-
+<div class="lightbox" id="lightbox">
+<img id="lightbox-img">
 </div>
 
 <script>
-// Simple FAQ toggle
-document.querySelectorAll('.faq .q').forEach((q, idx) => {
-  q.style.padding = '12px';
-  q.style.background = '#fff';
-  q.style.border = '1px solid var(--border)';
-  q.style.borderRadius = '8px';
-  q.style.marginBottom = '8px';
-  q.style.cursor = 'pointer';
-  q.addEventListener('click', () => {
-    const ans = q.nextElementSibling;
-    const visible = ans.style.display === 'block';
-    document.querySelectorAll('.faq .a').forEach(a => a.style.display = 'none');
-    if(!visible) ans.style.display = 'block';
+document.querySelectorAll(".faq-question").forEach(q=>{
+  q.addEventListener("click",()=>{
+    const ans=q.nextElementSibling;
+    ans.style.display=ans.style.display==="block"?"none":"block";
   });
+});
+
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
+
+document.querySelectorAll(".screenshot").forEach(img=>{
+  img.addEventListener("click",()=>{
+    lightbox.style.display="flex";
+    lightboxImg.src=img.src;
+  });
+});
+
+lightbox.addEventListener("click",()=>{
+  lightbox.style.display="none";
 });
 </script>
 
