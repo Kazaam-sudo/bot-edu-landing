@@ -233,51 +233,46 @@ ol.sub{margin-left:14px;color:var(--muted)}
       <div class="steps">
 
         <!-- STEP 1 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">1</div>
-            <div>
-              <div class="step-title">Поиск и выбор актива</div>
-              <div style="color:var(--muted);font-size:13px">Где смотреть → TradingView → Top 30</div>
-            </div>
-          </div>
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-icon">1</div>
+    <div>
+      <div class="step-title">Поиск и выбор актива</div>
+      <div style="color:var(--muted);font-size:13px">TradingView → Top 30</div>
+    </div>
+  </div>
 
-          <ol class="detailed">
-            <li>Открываем <a class="link" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank">TradingView — Crypto</a>.</li>
-            <li>Сортируем по Market Cap → берем Top 10–30.</li>
-            <li>Фильтр: выбираем пары с активностью (объём не упал резко).</li>
-            <li>Ищем монету в боковом движении или на откате после последнего роста.</li>
-            <li><strong>Проверка (быстрая):</strong> нет ли серьезных новостей в ближайшие 24–72 часа (по CoinDesk/твиттер официальных каналов).</li>
-          </ol>
+  <ol class="detailed">
+    <li>Открываем TradingView → раздел Crypto.</li>
+    <li>Сортируем по Market Cap и выбираем актив из Top 10–30.</li>
+    <li>Проверяем объёмы торгов — ликвидность должна быть стабильной.</li>
+    <li>Ищем актив, который недавно скорректировался после роста.</li>
+  </ol>
 
-          <div class="screens">
-            <img src="screenshot1.jpg" alt="TradingView example (загрузка своего скрина)">
-            <img src="screenshot2.jpg" alt="Top 30 list (загрузка своего скрина)">
-            <img src="screenshot3.jpg" alt="Volume check screenshot (загрузка своего скрина)">
-          </div>
-        </div>
+  <img src="screenshot1.jpg" class="screenshot" alt="Выбор актива в TradingView">
+</div>
 
-        <!-- STEP 2 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">2</div>
-            <div>
-              <div class="step-title">Определение точки входа и таймфрейма</div>
-              <div style="color:var(--muted);font-size:13px">TF 4H / 1D — смотрим стабилизацию</div>
-            </div>
-          </div>
 
-          <ol class="detailed">
-            <li>Открываем график выбранной пары на TradingView.</li>
-            <li>Ставим таймфрейм 4H, проверяем 1D для контекста.</li>
-            <li>Ищем место, где после отката цена «успокоилась» — несколько свечей бокового или небольшого восходящего движения.</li>
-            <li>Отмечаем цену входа — текущая цена или ближайшая значимая свечная зона.</li>
-          </ol>
+       <!-- STEP 2 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-icon">2</div>
+    <div>
+      <div class="step-title">Определение точки входа и таймфрейма</div>
+      <div style="color:var(--muted);font-size:13px">TF 4H / 1D</div>
+    </div>
+  </div>
 
-          <p style="color:var(--muted);font-size:14px;margin-top:8px">
-            Подсказка: если видишь резкий шум или слабую ликвидность — переходи к другому активу.
-          </p>
-        </div>
+  <ol class="detailed">
+    <li>Открываем график выбранной пары.</li>
+    <li>Ставим таймфрейм 4H и проверяем 1D для общей картины.</li>
+    <li>Ищем откат после роста и стабилизацию.</li>
+    <li>Фиксируем текущую цену как потенциальную точку входа.</li>
+  </ol>
+
+  <img src="screenshot2.jpg" class="screenshot" alt="График с откатом и боковиком">
+</div>
+
 
         <!-- STEP 3 -->
         <div class="step-card">
@@ -326,31 +321,30 @@ ol.sub{margin-left:14px;color:var(--muted)}
         </div>
 
         <!-- STEP 5 -->
-        <div class="step-card">
-          <div class="step-header">
-            <div class="step-icon">5</div>
-            <div>
-              <div class="step-title">Настройка в Binance (практика)</div>
-              <div style="color:var(--muted);font-size:13px">Binance → Trade → Grid</div>
-            </div>
-          </div>
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-icon">5</div>
+    <div>
+      <div class="step-title">Настройка в Binance (практика)</div>
+      <div style="color:var(--muted);font-size:13px">Binance → Grid Trading</div>
+    </div>
+  </div>
 
-          <ol class="detailed">
-            <li>Заходим в Binance → Trade → Grid Trading (или Spot → Grid).</li>
-            <li>Выбираем торговую пару (например BTC/USDT).</li>
-            <li>Вводим Lower Price (нижняя граница) и Upper Price (верхняя граница).</li>
-            <li>Вводим Grid Number: 20–40.</li>
-            <li>Вводим Total Investment (сумма для бота) — начать с тестовой небольшой суммы.</li>
-            <li>Проверяем расчёт шага, минимальный ордер и подтверждаем Create / Start.</li>
-          </ol>
+  <ol class="detailed">
+    <li>Заходим в Binance → Trade → Grid Trading.</li>
+    <li>Выбираем торговую пару (например BTC/USDT).</li>
+    <li>Вводим Lower Price и Upper Price.</li>
+    <li>Устанавливаем 20–40 уровней.</li>
+    <li>Вводим сумму и запускаем бота.</li>
+  </ol>
 
-          <div style="margin-top:12px" class="center">
-            <a class="btn" href="https://www.binance.com/" target="_blank">Перейти к Binance</a>
-            <a class="btn secondary" style="margin-left:10px" href="https://www.tradingview.com/chart/" target="_blank">Открыть график в TradingView</a>
-          </div>
+  <div style="margin-top:12px">
+    <a class="btn" href="https://www.binance.com/" target="_blank">Перейти к Binance</a>
+  </div>
 
-          <img src="screenshot3.jpg" alt="Binance grid example" style="width:100%;margin-top:12px;border-radius:8px;border:1px solid var(--border)">
-        </div>
+  <img src="screenshot3.jpg" class="screenshot" alt="Настройка Grid в Binance">
+</div>
+
 
         <!-- STEP 6 -->
         <div class="step-card">
