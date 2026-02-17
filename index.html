@@ -1,303 +1,496 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="es-MX">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gridlab Academy — Сеточная стратегия</title>
-<link rel="icon" href="gridlab_academy_favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gridlab Academy — Guía paso a paso (Grid Bot)</title>
+<link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* Mobile-first, responsive, no horizontal scroll */
 :root{
-  --accent:#22C55E;
-  --text:#0F1115;
-  --muted:#6B7280;
-  --border:#E5E7EB;
-  --bg:#ffffff;
-  --card:#F9FAFB;
+  --bg: #ffffff;
+  --card: #f7f8fa;
+  --text: #0F1115;
+  --muted: #6B7280;
+  --accent: #22C55E;
+  --border: #E6E9EE;
+  --shadow: 0 8px 28px rgba(15,17,21,0.06);
+  --radius: 12px;
+  --maxw: 1100px;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html,body{
-  overflow-x:hidden;
-}
-
+/* Base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;overflow-x:hidden}
 body{
-  font-family:'Inter',sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background:var(--bg);
   color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   line-height:1.6;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Container */
 .container{
   width:92%;
-  max-width:1100px;
+  max-width:var(--maxw);
   margin:0 auto;
-  padding:40px 0;
+  padding:24px 0 60px;
 }
 
-h1{
-  font-size:36px;
-  margin-bottom:15px;
+/* Header */
+.header{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
 }
+.brand{display:flex;gap:12px;align-items:center}
+.logo-box{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#0F1115 0%, #0B0E13 100%);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.logo-box svg{width:28px;height:28px}
+.title{font-size:16px;font-weight:700}
+.subtitle{font-size:12px;color:var(--muted)}
 
-h2{
-  font-size:26px;
-  margin-bottom:15px;
-}
-
-p{
-  color:var(--muted);
-  margin-bottom:15px;
-}
-
+/* CTA */
+.cta{display:flex;gap:10px;align-items:center}
 .btn{
-  display:inline-block;
+  display:inline-flex;align-items:center;gap:8px;
   background:var(--accent);
   color:#000;
-  padding:12px 18px;
-  border-radius:8px;
+  padding:10px 14px;
+  border-radius:10px;
   font-weight:600;
   text-decoration:none;
-  margin-top:10px;
+  border:none;
+  cursor:pointer;
+  box-shadow: 0 8px 20px rgba(34,197,94,0.12);
+  font-size:14px;
 }
-
 .btn.secondary{
-  background:#fff;
-  border:1px solid var(--border);
-  color:var(--text);
+  background:#fff;color:var(--text);border:1px solid var(--border);padding:9px 12px;
 }
 
+/* Hero */
 .hero{
-  text-align:center;
-  padding:60px 0;
+  display:block;
+  padding:18px 0 30px;
 }
+.hero h1{font-size:28px;line-height:1.05;margin-bottom:8px}
+.hero p{color:var(--muted);font-size:15px;margin-bottom:14px}
 
-.video-wrapper{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
-  overflow:hidden;
+/* Card */
+.card{
+  background:var(--card);
   border-radius:12px;
-  margin-top:20px;
-}
-
-.video-wrapper iframe{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-}
-
-.section{
-  padding:50px 0;
-  border-top:1px solid var(--border);
-}
-
-.step{
-  background:var(--card);
-  padding:20px;
-  border-radius:10px;
-  margin-bottom:20px;
+  padding:14px;
   border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
-.step-title{
-  font-weight:600;
-  margin-bottom:10px;
+/* Video (responsive) */
+.video-wrapper{
+  position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);
+}
+.video-wrapper iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
+
+/* Sections */
+.section{margin-top:20px;padding:22px 0;border-top:1px solid var(--border)}
+.section h2{font-size:20px;margin-bottom:8px}
+.divider{height:3px;width:64px;background:var(--accent);border-radius:6px;margin:12px 0 18px 0}
+
+/* Steps layout: grid for tablet+, single col mobile */
+.steps{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:980px){
+  .steps{grid-template-columns:repeat(2,1fr)}
 }
 
+/* Step card */
+.step-card{
+  background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;box-shadow:0 8px 24px rgba(2,6,23,0.04);
+}
+.step-header{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.step-icon{
+  width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04));display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;font-size:16px;
+}
+.step-title{font-weight:600;font-size:16px}
+
+/* Ordered lists */
+ol.detailed{margin-left:14px;color:var(--text);margin-bottom:10px;padding-left:14px}
+ol.detailed li{margin-bottom:8px}
+ol.sub{margin-left:12px;color:var(--muted);margin-top:6px}
+
+/* Screens and captions */
 .screenshot{
-  width:100%;
-  max-width:100%;
-  height:auto;
-  border-radius:8px;
-  margin-top:10px;
-  cursor:pointer;
+  width:100%;height:auto;border-radius:8px;margin-top:12px;border:1px solid var(--border);cursor:pointer;display:block;object-fit:cover;
+  max-height:380px;
 }
+.caption{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:6px}
 
-.caption{
-  font-size:14px;
-  color:var(--muted);
-  margin-top:6px;
-}
+/* Screens grid for step 1 (3 images on desktop) */
+.screens{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+@media (min-width:980px){ .screens{grid-template-columns:repeat(3,1fr)} }
 
-.checklist li{
-  margin-bottom:8px;
-}
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:8px;padding:14px;background:#fff;border-radius:10px;border:1px solid var(--border)}
+.checklist li{list-style:none;padding-left:24px;position:relative;color:var(--text)}
+.checklist li:before{content:"";position:absolute;left:0;top:6px;width:14px;height:14px;background:var(--accent);border-radius:4px}
 
-.faq-item{
-  margin-bottom:10px;
-}
+/* FAQ */
+.faq .q{background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq .a{display:none;padding:12px;color:var(--muted);border-left:3px solid var(--accent);background:#fbfcfd;border-radius:8px;margin-bottom:10px}
 
-.faq-question{
-  cursor:pointer;
-  background:var(--card);
-  padding:12px;
-  border-radius:8px;
-  border:1px solid var(--border);
-}
-
-.faq-answer{
-  display:none;
-  padding:10px;
-  color:var(--muted);
-}
-
-footer{
-  text-align:center;
-  padding:40px 0;
-  font-size:14px;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-}
+/* Footer */
+.footer{padding:28px 0;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:20px}
 
 /* Lightbox */
 .lightbox{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:20px;
 }
+.lightbox img{max-width:100%;max-height:96vh;border-radius:10px}
 
-.lightbox img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:10px;
+/* small responsiveness tweaks */
+@media (max-width:480px){
+  .btn{font-size:13px;padding:10px 12px}
+  .hero h1{font-size:22px}
+  .step-title{font-size:15px}
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-<section class="hero">
-<h1>Guía paso a paso para configurar un Bot Grid</h1>
-<p>Explicación estructurada para trabajar con la volatilidad del mercado.</p>
-<a class="btn" href="#video">Ver video</a>
-</section>
+  <!-- Header -->
+  <header class="header" aria-label="Cabecera">
+    <div class="brand" aria-hidden="false">
+      <div class="logo-box" aria-hidden="true">
+        <!-- grid icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" fill="#FFFFFF"/>
+          <rect x="13" y="3" width="8" height="8" fill="#22C55E"/>
+          <rect x="3" y="13" width="8" height="8" fill="#22C55E"/>
+          <rect x="13" y="13" width="8" height="8" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div>
+        <div class="title">Gridlab <span style="color:var(--accent)">Academy</span></div>
+        <div class="subtitle">Guías paso a paso sobre Grid Trading</div>
+      </div>
+    </div>
 
-<section id="video" class="section">
-<h2>Video explicativo</h2>
-<div class="video-wrapper">
-<iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" allowfullscreen></iframe>
+    <div class="cta" role="navigation" aria-label="Navegación principal">
+      <a class="btn" href="#instruction">Empezar</a>
+      <a class="btn secondary" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank" rel="noopener">Abrir TradingView</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Guía completa: configurar un Bot Grid en Binance</h1>
+    <p>Selecciona el activo correcto, calcula el rango 70% abajo / 30% arriba, configura la cuadrícula y monitorea de forma segura. Enfocado a principiantes y practicantes.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+      <a class="btn" href="#video-block">Ver video</a>
+      <a class="btn secondary" href="#instruction">Ver instrucciones</a>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="video-block" class="section" aria-labelledby="video-title">
+    <h2 id="video-title">Video instruccional</h2>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="card" style="padding:12px;">
+      <div class="video-wrapper" role="region" aria-label="Video de instrucción">
+        <iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" title="Grid Strategy Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instruction -->
+  <section id="instruction" class="section" aria-labelledby="instruction-title">
+    <h2 id="instruction-title">Instrucciones detalladas (por pasos)</h2>
+    <div class="divider" aria-hidden="true"></div>
+
+    <p style="color:var(--muted);margin-bottom:12px">
+      Sigue la secuencia: desde la selección del activo hasta el lanzamiento y control del bot. Cada paso contiene subpasos prácticos y comprobaciones.
+    </p>
+
+    <div class="steps">
+
+      <!-- STEP 1 -->
+      <article class="step-card" aria-labelledby="step1-title">
+        <div class="step-header">
+          <div class="step-icon">1</div>
+          <div>
+            <div id="step1-title" class="step-title">Búsqueda y selección del activo</div>
+            <div style="color:var(--muted);font-size:13px">Dónde mirar → TradingView → Top 30</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Abrir <a class="link" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank" rel="noopener">TradingView — Crypto</a>.</li>
+          <li>Ordenar por Market Cap (Top 10–30).</li>
+          <li>Filtrar pares con volumen estable y liquidez suficiente.</li>
+          <li>Buscar monedas en rango lateral o en corrección tras una subida.</li>
+          <li><strong>Chequeo rápido:</strong> revisar noticias relevantes 24–72 hrs (CoinDesk, canales oficiales).</li>
+        </ol>
+
+        <div class="screens" aria-hidden="true">
+          <img src="screenshot1.jpg" alt="Lista Top 30 en TradingView" class="screenshot" data-caption="Selección del activo en TradingView — Top 30">
+        </div>
+        <div class="caption">Selección del activo en TradingView y verificación de volumen.</div>
+      </article>
+
+      <!-- STEP 2 -->
+      <article class="step-card" aria-labelledby="step2-title">
+        <div class="step-header">
+          <div class="step-icon">2</div>
+          <div>
+            <div id="step2-title" class="step-title">Definir punto de entrada y temporalidad</div>
+            <div style="color:var(--muted);font-size:13px">TF 4H / 1D — buscar estabilización</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Abrir el gráfico de la pareja seleccionada en TradingView.</li>
+          <li>Usar 4H para entrada y revisar 1D para contexto macro.</li>
+          <li>Identificar zona donde la corrección se estabiliza (varias velas laterales o con leve ascenso).</li>
+          <li>Marcar el precio actual como referencia de entrada.</li>
+        </ol>
+
+        <img src="screenshot2.jpg" alt="Gráfico con corrección y rango" class="screenshot" data-caption="Ejemplo de corrección y rango lateral en 4H">
+        <div class="caption">Ejemplo de corrección y consolidación en 4H — zona de entrada.</div>
+      </article>
+
+      <!-- STEP 3 -->
+      <article class="step-card" aria-labelledby="step3-title">
+        <div class="step-header">
+          <div class="step-icon">3</div>
+          <div>
+            <div id="step3-title" class="step-title">Cálculo del rango 70% abajo / 30% arriba</div>
+            <div style="color:var(--muted);font-size:13px">Cálculo simple y comprobación visual</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Tomar el precio actual como <strong>Entry</strong> (ej. 1000).</li>
+          <li>Lower = Entry × 0.30 → 1000 × 0.30 = 300 (70% abajo).</li>
+          <li>Upper = Entry × 1.30 → 1000 × 1.30 = 1300 (30% arriba).</li>
+          <li>Verificar que [Lower, Upper] cubra niveles relevantes en el gráfico.</li>
+          <li>Si el rango queda muy estrecho o muy amplio, ajustar manualmente según niveles visibles.</li>
+        </ol>
+
+        <p style="color:var(--muted);font-size:13px;margin-top:8px">
+          Ejemplo práctico: Entry 1000 → Lower 300 → Upper 1300. Siempre validar con volumen y estructura.
+        </p>
+      </article>
+
+      <!-- STEP 4 -->
+      <article class="step-card" aria-labelledby="step4-title">
+        <div class="step-header">
+          <div class="step-icon">4</div>
+          <div>
+            <div id="step4-title" class="step-title">Cálculo de niveles y paso</div>
+            <div style="color:var(--muted);font-size:13px">Recomendado 20–40 niveles</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Elegir un número inicial de niveles (p. ej. 30).</li>
+          <li>Calcular paso: (Upper − Lower) / levels.</li>
+          <li>Verificar tamaño mínimo de orden en la bolsa; si es insuficiente, reducir niveles.</li>
+          <li>Calcular monto por nivel: inversión_total / levels (ej. 300 USDT / 30 = 10 USDT por nivel).</li>
+        </ol>
+
+        <p style="color:var(--muted);font-size:13px;margin-top:8px">
+          Consejo: comenzar con 20–30 niveles y una suma de prueba para comprobar ejecución.
+        </p>
+      </article>
+
+      <!-- STEP 5 -->
+      <article class="step-card" aria-labelledby="step5-title">
+        <div class="step-header">
+          <div class="step-icon">5</div>
+          <div>
+            <div id="step5-title" class="step-title">Configuración en Binance (práctica)</div>
+            <div style="color:var(--muted);font-size:13px">Binance → Trade → Grid Trading</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Acceder a Binance → Grid Trading (Spot).</li>
+          <li>Seleccionar la pareja (ej. BTC/USDT).</li>
+          <li>Ingresar Lower Price y Upper Price calculados.</li>
+          <li>Configurar Grid Number: 20–40.</li>
+          <li>Ingresar Total Investment y confirmar Create/Start.</li>
+          <li>Comprobar paso calculado y tamaño mínimo de orden antes de iniciar.</li>
+        </ol>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank" rel="noopener">Ir a Binance (ref)</a>
+          <a class="btn secondary" href="https://www.tradingview.com/chart/" target="_blank" rel="noopener">Abrir gráfico (TradingView)</a>
+        </div>
+
+        <img src="screenshot3.jpg" alt="Ejemplo Grid en Binance" class="screenshot" data-caption="Pantalla de configuración Grid en Binance">
+        <div class="caption">Ejemplo de la pantalla de Grid Trading: Lower / Upper / Levels / Total Investment.</div>
+      </article>
+
+      <!-- STEP 6 -->
+      <article class="step-card" aria-labelledby="step6-title">
+        <div class="step-header">
+          <div class="step-icon">6</div>
+          <div>
+            <div id="step6-title" class="step-title">Primer arranque — qué monitorizar</div>
+            <div style="color:var(--muted);font-size:13px">Vigilar 24–72 horas</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Revisar historial de órdenes y P/L del bot.</li>
+          <li>Comprobar frecuencia de ejecuciones y posibles errores (mínimo orden).</li>
+          <li>Asegurar que compras/ventas correspondan al paso calculado.</li>
+          <li>Si hay errores, ajustar paso o niveles y volver a testear con monto pequeño.</li>
+        </ol>
+      </article>
+
+      <!-- STEP 7 -->
+      <article class="step-card" aria-labelledby="step7-title">
+        <div class="step-header">
+          <div class="step-icon">7</div>
+          <div>
+            <div id="step7-title" class="step-title">Acción si el precio sale del rango</div>
+            <div style="color:var(--muted);font-size:13px">Estrategia escalonada — abrir bot inferior</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Si el precio cae por debajo de Lower: no hay liquidación en Spot; el activo queda en balance.</li>
+          <li>Evaluar abrir un nuevo bot con nuevas fronteras (ej. aplicar 70/30 desde la nueva referencia).</li>
+          <li>Al recuperarse el precio, el bot inferior puede cerrar con ganancia y el superior reanuda trabajo.</li>
+          <li>Verificar si la caída se debió a factores fundamentales antes de ampliar exposición.</li>
+        </ol>
+      </article>
+
+      <!-- STEP 8 -->
+      <article class="step-card" aria-labelledby="step8-title">
+        <div class="step-header">
+          <div class="step-icon">8</div>
+          <div>
+            <div id="step8-title" class="step-title">Control, auditoría y escalado</div>
+            <div style="color:var(--muted);font-size:13px">Plan semanal/mensual</div>
+          </div>
+        </div>
+
+        <ol class="detailed">
+          <li>Revisar semanalmente: ¿se mantiene el rango y el comportamiento esperado?</li>
+          <li>Si la estrategia rinde, aumentar capital gradualmente o abrir bots en otras parejas.</li>
+          <li>Diversificar: no concentrar todo el capital en un solo rango/activo.</li>
+          <li>Llevar una tabla simple (fecha | par | lower/upper | levels | inversión | resultado) para análisis.</li>
+        </ol>
+      </article>
+
+    </div> <!-- /steps -->
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section" aria-labelledby="checklist-title">
+    <div class="container" style="padding:0">
+      <h2 id="checklist-title">Antes de iniciar — verifique</h2>
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="checklist" role="list" style="margin-top:8px">
+        <li>El activo está en Top 10–30 por capitalización.</li>
+        <li>Volumen estable — sin caída brusca de liquidez.</li>
+        <li>Rango calculado 70%/30% y validado visualmente.</li>
+        <li>Verificado tamaño mínimo de orden en la bolsa.</li>
+        <li>Iniciar con monto de prueba pequeño.</li>
+        <li>Reservar liquidez para posibles ré-inicios.</li>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container" style="padding:0">
+      <h2 id="faq-title">FAQ — Preguntas frecuentes</h2>
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="faq" role="list">
+        <div class="q">¿Qué pasa si el precio cae por debajo de Lower?</div>
+        <div class="a">En Spot no hay liquidación; el activo queda en balance. Se puede abrir un nuevo bot por debajo o mantener el activo hasta recuperación.</div>
+
+        <div class="q">¿Cuántos niveles debo usar?</div>
+        <div class="a">Entre 20 y 40 niveles es un buen inicio. Para mercados muy volátiles se puede aumentar la densidad.</div>
+
+        <div class="q">¿Es apto para principiantes?</div>
+        <div class="a">Sí, con la condición de probar con montos pequeños y no usar apalancamiento.</div>
+
+        <div class="q">¿Debo monitorear noticias?</div>
+        <div class="a">Sí. Eventos fundamentales pueden cambiar la estructura del mercado; verificar antes de lanzar y durante movimientos fuertes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    © 2026 Gridlab Academy — Contenido educativo. No constituye asesoría financiera.
+  </footer>
 </div>
-</section>
 
-<section class="section">
-<h2>Paso 1 — Selección del activo</h2>
-<div class="step">
-<ol>
-<li>Abrimos TradingView → sección Crypto.</li>
-<li>Ordenamos por capitalización → Top 10–30.</li>
-<li>Buscamos una moneda con corrección reciente.</li>
-</ol>
-<img src="screenshot1.jpg" class="screenshot">
-<div class="caption">Selección del activo en TradingView.</div>
-<a class="btn secondary" href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/" target="_blank">Abrir TradingView</a>
-</div>
-</section>
-
-<section class="section">
-<h2>Paso 2 — Punto de entrada</h2>
-<div class="step">
-<ol>
-<li>Abrimos temporalidad 4H o 1D.</li>
-<li>Identificamos estabilización tras la corrección.</li>
-<li>Tomamos el precio actual como referencia.</li>
-</ol>
-<img src="screenshot2.jpg" class="screenshot">
-<div class="caption">Ejemplo de corrección y rango lateral.</div>
-</div>
-</section>
-
-<section class="section">
-<h2>Paso 3 — Configuración en Binance</h2>
-<div class="step">
-<ol>
-<li>Entramos a Binance → Grid Trading.</li>
-<li>Definimos rango 70% abajo / 30% arriba.</li>
-<li>Elegimos 20–40 niveles.</li>
-<li>Iniciamos con monto pequeño.</li>
-</ol>
-<img src="screenshot3.jpg" class="screenshot">
-<div class="caption">Configuración del bot Grid en Binance.</div>
-<a class="btn" href="https://accounts.binanceuz.co/register?ref=38947636" target="_blank">
-Ir a Binance
-</a>
-</div>
-</section>
-
-<section class="section">
-<h2>Antes de iniciar verifica</h2>
-<ul class="checklist">
-<li>Activo dentro del Top 30.</li>
-<li>Movimiento lateral o corrección reciente.</li>
-<li>Trading Spot sin apalancamiento.</li>
-<li>Capital distribuido progresivamente.</li>
-</ul>
-</section>
-
-<section class="section">
-<h2>FAQ</h2>
-
-<div class="faq-item">
-<div class="faq-question">¿Qué pasa si el precio sale del rango?</div>
-<div class="faq-answer">En Spot no existe liquidación. Puedes abrir un nuevo bot más abajo.</div>
-</div>
-
-<div class="faq-item">
-<div class="faq-question">¿Cuántos niveles usar?</div>
-<div class="faq-answer">Entre 20 y 40 niveles es un buen punto de partida.</div>
-</div>
-
-</section>
-
-<footer>
-© 2026 Gridlab Academy — Material educativo.
-</footer>
-
-</div>
-
-<div class="lightbox" id="lightbox">
-<img id="lightbox-img">
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <img id="lightbox-img" alt="Imagen ampliada">
 </div>
 
 <script>
-document.querySelectorAll(".faq-question").forEach(q=>{
-  q.addEventListener("click",()=>{
+/* FAQ toggle (single open) */
+document.querySelectorAll('.faq .q').forEach(q=>{
+  q.style.padding='12px';
+  q.style.background='#fff';
+  q.style.border='1px solid var(--border)';
+  q.style.borderRadius='10px';
+  q.style.marginBottom='8px';
+  q.style.cursor='pointer';
+  q.addEventListener('click', ()=>{
     const ans=q.nextElementSibling;
-    ans.style.display=ans.style.display==="block"?"none":"block";
+    const isOpen = ans.style.display === 'block';
+    document.querySelectorAll('.faq .a').forEach(a => a.style.display = 'none');
+    if(!isOpen) ans.style.display = 'block'; else ans.style.display = 'none';
   });
 });
 
-const lightbox=document.getElementById("lightbox");
-const lightboxImg=document.getElementById("lightbox-img");
+/* Lightbox for screenshots */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
 
-document.querySelectorAll(".screenshot").forEach(img=>{
-  img.addEventListener("click",()=>{
-    lightbox.style.display="flex";
-    lightboxImg.src=img.src;
+document.querySelectorAll('.screenshot').forEach(img=>{
+  img.addEventListener('click', ()=> {
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
+    lightbox.setAttribute('aria-hidden','false');
   });
 });
 
-lightbox.addEventListener("click",()=>{
-  lightbox.style.display="none";
+/* Close lightbox on click or ESC */
+lightbox.addEventListener('click', ()=> {
+  lightbox.style.display = 'none';
+  lightbox.setAttribute('aria-hidden','true');
 });
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') {
+    lightbox.style.display = 'none';
+    lightbox.setAttribute('aria-hidden','true');
+  }
+});
+
+/* Prevent horizontal scroll on iOS due to focus outlines */
+document.addEventListener('touchmove', function(){}, {passive:true});
 </script>
 
 </body>
