@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GridLab Academy — Автоматическая Grid-стратегия</title>
+<title>GridLab Academy — Автоматическая настройка Grid-бота</title>
 <link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
-<meta name="description" content="Системная настройка Grid-бота для спот-торговли. Диапазон, уровни, запуск и контроль стратегии.">
-<meta property="og:title" content="GridLab Academy — Grid-бот для спота" />
+<meta name="description" content="Пошаговая настройка Grid-бота для спот-рынка. Система, диапазон 70/30, контроль и масштабирование.">
+<meta property="og:title" content="GridLab Academy — настройка Grid-бота" />
 <meta property="og:description" content="Перейдите от хаотичной торговли к системной автоматизации." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridlab.academy" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -28,12 +28,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;overflow-x:hidden}
-body{
-  font-family:'Inter',system-ui;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.55;
-}
+body{font-family:'Inter',system-ui;background:var(--bg);color:var(--text);line-height:1.55}
 .container{width:94%;max-width:var(--maxw);margin:0 auto;padding:20px 0 80px}
 .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .brand{display:flex;align-items:center;gap:12px}
@@ -42,6 +37,7 @@ body{
 .title{font-weight:800;font-size:18px}
 .title .gl{color:#000}
 .title .ac{color:var(--accent)}
+
 .btn{
   display:inline-block;
   padding:14px 24px;
@@ -53,56 +49,21 @@ body{
   box-shadow:0 12px 30px rgba(34,197,94,0.18);
 }
 .section{margin-top:70px}
-.section h2{font-size:28px;margin-bottom:20px}
+.section h2{font-size:28px;margin-bottom:18px}
 .hero h1{font-size:36px;line-height:1.1;margin-bottom:16px}
 .hero p{font-size:18px;color:var(--muted);margin-bottom:24px}
-.pain, .future{
-  border-radius:var(--radius);
-  padding:28px;
-}
-.pain{
-  background:#fff5f5;
-  border:1px solid rgba(239,68,68,0.25);
-}
-.future{
-  background:#f9fafb;
-  border:1px solid var(--border);
-}
-.stat{
-  font-size:42px;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:12px;
-}
-.highlight{
-  background:#f7fff9;
-  border:1px solid rgba(34,197,94,0.2);
-  border-radius:var(--radius);
-  padding:28px;
-}
+.stat{font-size:46px;font-weight:800;color:var(--accent);margin-bottom:12px}
+.pain{background:#fff5f5;border:1px solid rgba(239,68,68,0.25);border-radius:var(--radius);padding:30px}
+.future{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:30px}
+.highlight{background:#f7fff9;border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius);padding:30px}
 .cards{display:grid;gap:20px}
-@media(min-width:900px){
-  .cards{grid-template-columns:repeat(3,1fr)}
-}
-.card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
-  box-shadow:var(--shadow);
-}
-.footer{
-  margin-top:80px;
-  padding-top:30px;
-  border-top:1px solid var(--border);
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-}
+@media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
 </style>
 </head>
-<body>
 
+<body>
 <div class="container">
 
 <header class="header">
@@ -115,63 +76,61 @@ body{
     </div>
   </div>
   <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
-    Начать настройку
+    Перейти в Telegram
   </a>
 </header>
 
 <section class="hero">
-  <h1>Перестаньте торговать хаотично. Настройте автоматический Grid-бот по системе.</h1>
+  <h1>Настройте автоматический Grid-бот и переведите спот-торговлю в системный режим</h1>
   <p>
-  Спот-рынок большую часть времени движется в диапазоне.  
-  Вместо угадывания движения — выстраивайте стратегию и автоматизируйте её.
+  Без угадывания рынка. Без постоянного сидения у графика.  
+  Пошаговая модель настройки диапазона, уровней и запуска.
   </p>
   <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
-    Перейти к обучению
+    Начать настройку
   </a>
 </section>
 
 <section class="section">
   <div class="pain">
     <h2>Почему большинство теряет на споте</h2>
-    <p>— Входят на эмоциях</p>
-    <p>— Усредняют без расчёта</p>
+    <p>— Входят импульсивно</p>
     <p>— Не задают диапазон заранее</p>
-    <p>— Работают без чёткой модели</p>
+    <p>— Усредняют без расчёта</p>
+    <p>— Работают без системной модели</p>
     <br>
-    <p><strong>Итог:</strong> сделки случайны, результат нестабилен.</p>
+    <p><strong>Итог:</strong> результат зависит от эмоций, а не от структуры.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="stat">~70% времени</div>
   <p>
-  Рынок проводит в диапазоне, а не в устойчивом тренде.  
-  Сеточная стратегия как раз работает в этих фазах.
+  Рынок находится в диапазоне, а не в устойчивом тренде.  
+  Grid-стратегия построена именно под такие фазы.
   </p>
 </section>
 
 <section class="section">
   <div class="future">
     <h2>Что будет, если ничего не менять</h2>
-    <p>Через 3–6 месяцев ситуация останется прежней:</p>
-    <p>— те же эмоциональные входы</p>
-    <p>— те же нерегулярные результаты</p>
+    <p>Через несколько месяцев вы окажетесь в той же точке:</p>
+    <p>— хаотичные сделки</p>
+    <p>— нестабильный результат</p>
     <p>— зависимость от случайных движений рынка</p>
     <br>
-    <p>
-    Система либо есть, либо её нет.  
-    Рынок не прощает хаос.
-    </p>
+    <p>Либо есть система — либо есть хаос.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="highlight">
-    <h2>Как работает система Grid</h2>
-    <p>Вы задаёте диапазон.</p>
-    <p>Вы рассчитываете уровни.</p>
-    <p>Бот автоматически исполняет стратегию внутри диапазона.</p>
-    <p>Вы контролируете процесс — без постоянного мониторинга.</p>
+    <h2>Как работает система</h2>
+    <p>1. Выбирается ликвидный актив.</p>
+    <p>2. Рассчитывается диапазон 70/30.</p>
+    <p>3. Настраивается сетка уровней.</p>
+    <p>4. Бот автоматически исполняет стратегию внутри диапазона.</p>
+    <p>5. Вы контролируете процесс без постоянного мониторинга.</p>
   </div>
 </section>
 
@@ -179,25 +138,25 @@ body{
   <h2>Что вы получите внутри обучения</h2>
   <div class="cards">
     <div class="card">
-      <h3>Отбор актива</h3>
-      <p>Как определить подходящий рынок для сетки.</p>
+      <h3>Алгоритм выбора актива</h3>
+      <p>Чёткие критерии отбора для диапазонной работы.</p>
     </div>
     <div class="card">
-      <h3>Расчёт диапазона</h3>
-      <p>Правильная логика 70/30 и её адаптация под рынок.</p>
+      <h3>Точный расчёт диапазона</h3>
+      <p>Простая модель 70/30 с проверкой на графике.</p>
     </div>
     <div class="card">
-      <h3>Запуск и контроль</h3>
-      <p>Как мониторить и корректировать стратегию.</p>
+      <h3>Контроль и масштабирование</h3>
+      <p>Как управлять ботом и увеличивать объём постепенно.</p>
     </div>
   </div>
 </section>
 
 <section class="section" style="text-align:center;">
-  <h2>Мягкий старт без риска</h2>
+  <h2>Мягкий старт без лишнего риска</h2>
   <p style="color:var(--muted);margin-bottom:20px;">
-  Вы начнёте с тестовой суммы и пройдёте пошаговую модель.  
-  Никакого плеча. Только спот и расчёт.
+  Начните с тестовой суммы и пройдите модель пошагово.  
+  Только спот, без плеча. Контроль на каждом этапе.
   </p>
   <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
     Перейти в Telegram-бот
@@ -209,6 +168,5 @@ body{
 </div>
 
 </div>
-
 </body>
 </html>
