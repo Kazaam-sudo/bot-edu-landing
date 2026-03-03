@@ -3,132 +3,101 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GridLab <span>Academy</span> — Быстрый запуск Grid-бота</title>
+<title>GridLab Academy — Автоматическая Grid-стратегия</title>
 <link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
-<meta name="description" content="GridLab Academy — короткий прогрев и приглашение в Telegram-бот, где вы получите реф-ссылки, обучение и тарифы. Всё практично — детали внутри бота.">
-<meta property="og:title" content="GridLab Academy — настройка Grid-бота" />
-<meta property="og:description" content="Простой путь: выбрать актив, задать диапазон 70/30, запустить сетку — мы не даём полного гайда на лендинге, всё в боте." />
-<meta property="og:image" content="screenshot1.jpg" />
+<meta name="description" content="Системная настройка Grid-бота для спот-торговли. Диапазон, уровни, запуск и контроль стратегии.">
+<meta property="og:title" content="GridLab Academy — Grid-бот для спота" />
+<meta property="og:description" content="Перейдите от хаотичной торговли к системной автоматизации." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridlab.academy" />
-<meta name="twitter:card" content="summary_large_image" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg: #ffffff;
-  --card: #fbfdfe;
-  --text: #0F1115;
-  --muted: #6B7280;
-  --accent: #22C55E; /* academy green */
-  --accent-dark: #16a34a;
-  --border: #E6E9EE;
-  --shadow: 0 10px 30px rgba(15,17,21,0.06);
-  --radius: 14px;
-  --maxw: 1100px;
+  --bg:#ffffff;
+  --text:#0F1115;
+  --muted:#6B7280;
+  --accent:#22C55E;
+  --danger:#ef4444;
+  --border:#E6E9EE;
+  --radius:14px;
+  --shadow:0 12px 32px rgba(15,17,21,0.06);
+  --maxw:1100px;
 }
-
-/* mobile-first, no horizontal scroll */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%;overflow-x:hidden}
+html,body{width:100%;overflow-x:hidden}
 body{
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family:'Inter',system-ui;
   background:var(--bg);
   color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
-  -webkit-tap-highlight-color: transparent;
+  line-height:1.55;
 }
-
-/* layout */
-.container{width:94%;max-width:var(--maxw);margin:0 auto;padding:20px 0 60px}
-.header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0}
-.brand{display:flex;gap:12px;align-items:center}
-.logo-box{width:52px;height:52px;border-radius:12px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
-.logo-box img{width:36px;height:36px;object-fit:contain}
-.title{font-size:18px;font-weight:700;line-height:1}
+.container{width:94%;max-width:var(--maxw);margin:0 auto;padding:20px 0 80px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-box{width:52px;height:52px;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.logo-box img{width:36px}
+.title{font-weight:800;font-size:18px}
 .title .gl{color:#000}
-.title .ac{color:var(--accent);margin-left:6px}
-.subtitle{font-size:13px;color:var(--muted)}
-
-/* header CTAs */
-.cta{display:flex;gap:10px;align-items:center}
+.title .ac{color:var(--accent)}
 .btn{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--accent);color:#000;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none;border:none;cursor:pointer;
-  box-shadow: 0 10px 30px rgba(34,197,94,0.12);font-size:14px;
+  display:inline-block;
+  padding:14px 24px;
+  border-radius:14px;
+  background:var(--accent);
+  color:#000;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 12px 30px rgba(34,197,94,0.18);
 }
-.btn.secondary{background:#fff;color:var(--text);border:1px solid var(--border);padding:9px 12px;font-weight:600}
-.btn.ghost{background:transparent;border:1px dashed var(--border);color:var(--muted)}
-
-/* hero */
-.hero{padding:18px 0 10px}
-.hero h1{font-size:28px;line-height:1.05;margin-bottom:8px}
-.hero p{color:var(--muted);font-size:15px;margin-bottom:14px}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-
-/* card/video */
-.card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);box-shadow:var(--shadow)}
-.video-wrapper{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
-.video-wrapper iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
-
-/* sections */
-.section{margin-top:20px;padding:18px 0;border-top:1px solid var(--border)}
-.section h2{font-size:20px;margin-bottom:8px}
-.divider{height:4px;width:72px;background:var(--accent);border-radius:6px;margin:10px 0 18px}
-
-/* steps grid */
-.steps{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:980px){.steps{grid-template-columns:repeat(2,1fr)}}
-.step-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
-.step-header{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.step-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04));display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;font-size:16px}
-.step-title{font-weight:700;font-size:16px}
-
-/* screenshot responsive */
-.screenshot{width:100%;height:auto;border-radius:10px;margin-top:10px;border:1px solid var(--border);object-fit:cover;cursor:pointer;max-height:380px}
-
-/* benefits / cards layout */
-.cards{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:980px){.cards{grid-template-columns:repeat(3,1fr)}}
-.benefit{background:#fff;border-radius:12px;padding:14px;border:1px solid var(--border);box-shadow:0 6px 18px rgba(2,6,23,0.03)}
-.benefit h3{font-size:16px;margin-bottom:8px}
-
-/* testimonials */
-.cases{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-@media(min-width:980px){.cases{grid-template-columns:repeat(3,1fr)}}
-.case{
-  background:linear-gradient(180deg,#ffffff,#f7fff9);
-  border-radius:12px;padding:14px;border:1px solid rgba(34,197,94,0.08);
-  box-shadow:0 8px 30px rgba(34,197,94,0.06);
+.section{margin-top:70px}
+.section h2{font-size:28px;margin-bottom:20px}
+.hero h1{font-size:36px;line-height:1.1;margin-bottom:16px}
+.hero p{font-size:18px;color:var(--muted);margin-bottom:24px}
+.pain, .future{
+  border-radius:var(--radius);
+  padding:28px;
 }
-.case .name{font-weight:700;margin-bottom:6px}
-.case .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
-.case .quote{font-style:italic;color:#0f1724}
-
-/* FAQ */
-.faq .q{background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq .a{display:none;padding:12px;color:var(--muted);border-left:3px solid var(--accent);background:#fbfcfd;border-radius:8px;margin-bottom:10px}
-
-/* popup */
-.popup-wrapper{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:10000;padding:20px}
-.popup{width:100%;max-width:480px;background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(2,6,23,0.12)}
-.popup h3{margin-bottom:8px}
-.popup p{color:var(--muted);margin-bottom:12px}
-.popup .actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
-
-/* small */
-.caption{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:6px}
-.footer{padding:28px 0;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:20px}
-
-/* responsive tweaks */
-@media(max-width:480px){
-  .title{font-size:15px}
-  .hero h1{font-size:20px}
-  .btn{font-size:14px;padding:10px 12px}
+.pain{
+  background:#fff5f5;
+  border:1px solid rgba(239,68,68,0.25);
+}
+.future{
+  background:#f9fafb;
+  border:1px solid var(--border);
+}
+.stat{
+  font-size:42px;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+.highlight{
+  background:#f7fff9;
+  border:1px solid rgba(34,197,94,0.2);
+  border-radius:var(--radius);
+  padding:28px;
+}
+.cards{display:grid;gap:20px}
+@media(min-width:900px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+}
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.footer{
+  margin-top:80px;
+  padding-top:30px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
 }
 </style>
 </head>
@@ -136,284 +105,110 @@ body{
 
 <div class="container">
 
-  <!-- Header -->
-  <header class="header" aria-label="Заголовок сайта">
-    <div class="brand" aria-hidden="false">
-      <div class="logo-box" aria-hidden="true">
-        <img src="gridlab_academy_favicon.ico" alt="GridLab Academy">
-      </div>
-      <div>
-        <div class="title"><span class="gl">GridLab</span><span class="ac">Academy</span></div>
-        <div class="subtitle">Короткий прогрев — детали в ботe</div>
-      </div>
+<header class="header">
+  <div class="brand">
+    <div class="logo-box">
+      <img src="gridlab_academy_favicon.ico" alt="GridLab">
     </div>
-
-    <nav class="cta" role="navigation" aria-label="Главные кнопки">
-      <!-- primary CTAs (lead to Telegram bot) -->
-      <a class="btn" id="start-btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Начать обучение</a>
-      <a class="btn secondary" href="#how-it-works">Как это работает</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">Настрой сеточный бот без лишней теории — старт за 10 минут</h1>
-    <p>Мы не даём весь гайд на странице. Коротко прогреваем и переводим в Telegram-бот — там реф-ссылки, тарифы и практическое пошаговое обучение.</p>
-
-    <div class="hero-actions">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Начать обучение</a>
-      <a class="btn secondary" href="#video">Посмотреть видео</a>
-      <a class="btn ghost" href="#cases">Отзывы</a>
-    </div>
-  </section>
-
-  <!-- Video -->
-  <section id="video" class="section" aria-labelledby="video-title">
-    <h2 id="video-title">Короткая видео-инструкция</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="card">
-      <div class="video-wrapper" role="region" aria-label="Видео инструкция">
-        <iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" title="Инструкция Grid" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в бот</a>
-        <a class="btn secondary" href="#instruction">Кратко: шаги</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Short steps (keeps only thesis) -->
-  <section id="instruction" class="section" aria-labelledby="instruction-title">
-    <h2 id="instruction-title">Что вы получите (коротко)</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="steps">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-icon">1</div>
-          <div>
-            <div class="step-title">Выбор актива</div>
-            <div class="caption">Где смотреть — краткий чек-лист и фильтр для отбора пар</div>
-          </div>
-        </div>
-        <p class="caption">Тезисно: топ-пары, объём, боковик — решаем быстро, детали в боте.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-icon">2</div>
-          <div>
-            <div class="step-title">Определение диапазона 70/30</div>
-            <div class="caption">Как быстро посчитать Lower/Upper и проверить на графике</div>
-          </div>
-        </div>
-        <p class="caption">Формула и быстрые проверки — не углубляемся в мелочи на лендинге.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-icon">3</div>
-          <div>
-            <div class="step-title">Расчёт уровней и шага</div>
-            <div class="caption">Рекомендации: 20–40 уровней, проверка min order</div>
-          </div>
-        </div>
-        <p class="caption">Пример расчёта в пару кликов — полный калькулятор внутри бота.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-icon">4</div>
-          <div>
-            <div class="step-title">Запуск и мониторинг</div>
-            <div class="caption">Что смотреть первые 24–72 часа и как действовать при выходе за границы</div>
-          </div>
-        </div>
-        <p class="caption">Пошаговые действия и шаблоны уведомлений — внутри бота вы получите готовые чек-листы.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits -->
-  <section id="benefits" class="section" aria-labelledby="benefits-title">
-    <h2 id="benefits-title">Почему это работает</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="cards">
-      <div class="benefit">
-        <h3>Автоматизация 24/7</h3>
-        <p class="caption">Бот торгует постоянно — вы не сидите у экрана.</p>
-      </div>
-      <div class="benefit">
-        <h3>Простая механика</h3>
-        <p class="caption">Понятная логика «купил дешево — продал дороже» в заданном диапазоне.</p>
-      </div>
-      <div class="benefit">
-        <h3>Минимизация рутины</h3>
-        <p class="caption">Шаблоны и чек-листы в боте — меньше ошибок от ручных настроек.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:12px">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Хочу в бот — начать</a>
-    </div>
-  </section>
-
-  <!-- Cases / Testimonials -->
-  <section id="cases" class="section" aria-labelledby="cases-title">
-    <h2 id="cases-title">Истории успеха</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="cases" role="list">
-      <div class="case" role="listitem">
-        <div class="name">José Martínez, 34</div>
-        <div class="meta">Срок: 1 месяц — Ниша: BTC/USDT</div>
-        <div class="quote">Было: постоянно упускал моменты. Стало: бот сделал всю работу, я потестировал с небольшим депозитом и увидел стабильную работу. Рекомендую.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">María González, 28</div>
-        <div class="meta">Срок: 6 недель — Ниша: альткойны</div>
-        <div class="quote">Было: жалобы на ручную торговлю. Стало: автоматизация убрала рутину, теперь время на анализ, не на исполнение.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Luis Hernández, 40</div>
-        <div class="meta">Срок: 2 месяца — Ниша: диверсификация</div>
-        <div class="quote">Было: боялся настроек. Стало: доверил тестовой сумме, бот работал ровно — я масштабировал.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Ana López, 31</div>
-        <div class="meta">Срок: 3 недели — Ниша: стабильные пары</div>
-        <div class="quote">Было: мало времени на трейдинг. Стало: бот — пассивная подстраховка портфеля.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Carlos Rivera, 27</div>
-        <div class="meta">Срок: 1 месяц — Ниша: среднесрочные</div>
-        <div class="quote">Было: не понимал риск. Стало: обучился в боте и настроил бекап-бота — риск контролируется лучше.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Sofía Morales, 22</div>
-        <div class="meta">Срок: 2 недели — Ниша: эксперимент</div>
-        <div class="quote">Было: не было опыта. Стало: понятные инструкции в боте — стартовала с минималом и поняла механику.</div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Хочу такой результат</a>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section" aria-labelledby="faq-title">
-    <h2 id="faq-title">Частые вопросы</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="faq">
-      <div class="q">Это не скам?</div>
-      <div class="a">Нет. Мы даём образовательный продукт и инструменты. Риски есть — о них честно в боте и в FAQ внутри курса.</div>
-
-      <div class="q">Я новичок — смогу?</div>
-      <div class="a">Да. Бот ведёт шаг за шагом: выбор биржи → проверка аккаунта → настройка (практика внутри).</div>
-
-      <div class="q">У меня уже есть аккаунт — что тогда?</div>
-      <div class="a">Выбираете в боте ветку «Уже есть аккаунт» — получаете оффер без реф-ссылки и доступ к курсу.</div>
-
-      <div class="q">Сколько времени нужно?</div>
-      <div class="a">Базовая настройка займет 10–20 минут; обучение и первые выводы — 1–4 недели в зависимости от тестовой суммы.</div>
-
-      <div class="q">Какие риски?</div>
-      <div class="a">Рынок волатилен. Мы учим управлять риском, но не обещаем гарантии. Подробно — в модуле риска внутри бота.</div>
-
-      <div class="q">Почему не давать полный гайд на сайте?</div>
-      <div class="a">Чтобы защитить курсный продукт и иметь возможность персонализировать обучение и реф-ветки — детали выдаются в боте.</div>
-
-      <div class="q">Нужна ли регистрация на бирже?</div>
-      <div class="a">Да, для запуска бота нужен аккаунт на выбранной бирже. В боте есть отдельная ветка для тех, у кого аккаунта нет.</div>
-
-      <div class="q">Что если бот совершит ошибочные ордера?</div>
-      <div class="a">Чек-листы и преднастройки снижают вероятность. В боте — инструкции по восстановлению и контролю.</div>
-
-      <div class="q">Показываете ли вы P&L в примерах?</div>
-      <div class="a">Нет публичных P&L на лендинге — примеры результатов и кейсы внутри бота в анонимном виде.</div>
-
-      <div class="q">Можно ли масштабировать стратегию?</div>
-      <div class="a">Да — после теста и контроля вы получаете рекомендации по масштабированию.</div>
-
-      <div class="q">Нужен ли API-ключ биржи?</div>
-      <div class="a">Для автоматизации с внешними скриптами — да. Но мы показываем безопасные варианты через GUI ботов биржи (Spot Grid), инструкции в боте.</div>
-
-      <div class="q">Сколько стоит курс?</div>
-      <div class="a">Тарифы и пакеты — внутри бота (есть бюджетный, основной и VIP).</div>
-    </div>
-
-    <div style="margin-top:12px">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в бот — узнать тарифы</a>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="section" aria-labelledby="final-title">
-    <h2 id="final-title">Готовы начать?</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <p class="caption">Клик — и бот проведёт вас дальше: выбор ветки, реф-ссылки (если нужно) и курс по шагам.</p>
-    <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Начать в Telegram</a>
-  </section>
-
-  <footer class="footer" role="contentinfo">
-    © 2026 <span style="font-weight:700">GridLab</span><span style="color:var(--accent);font-weight:700">Academy</span> — обучающий материал. Не является инвестиционной рекомендацией.
-  </footer>
-</div>
-
-<!-- Popup (appears after ~12s) -->
-<div class="popup-wrapper" id="popup" aria-hidden="true">
-  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    <h3 id="popup-title">Коротко: начните с теста</h3>
-    <p>Присоединяйтесь в бот — получите чек-лист и быстрый модуль, чтобы настроить сетку за 10–20 минут.</p>
-    <div class="actions">
-      <button id="popup-close" class="btn secondary" style="background:#fff;border:1px solid var(--border)">Закрыть</button>
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в бот</a>
+    <div class="title">
+      <span class="gl">GridLab</span> <span class="ac">Academy</span>
     </div>
   </div>
+  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
+    Начать настройку
+  </a>
+</header>
+
+<section class="hero">
+  <h1>Перестаньте торговать хаотично. Настройте автоматический Grid-бот по системе.</h1>
+  <p>
+  Спот-рынок большую часть времени движется в диапазоне.  
+  Вместо угадывания движения — выстраивайте стратегию и автоматизируйте её.
+  </p>
+  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
+    Перейти к обучению
+  </a>
+</section>
+
+<section class="section">
+  <div class="pain">
+    <h2>Почему большинство теряет на споте</h2>
+    <p>— Входят на эмоциях</p>
+    <p>— Усредняют без расчёта</p>
+    <p>— Не задают диапазон заранее</p>
+    <p>— Работают без чёткой модели</p>
+    <br>
+    <p><strong>Итог:</strong> сделки случайны, результат нестабилен.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="stat">~70% времени</div>
+  <p>
+  Рынок проводит в диапазоне, а не в устойчивом тренде.  
+  Сеточная стратегия как раз работает в этих фазах.
+  </p>
+</section>
+
+<section class="section">
+  <div class="future">
+    <h2>Что будет, если ничего не менять</h2>
+    <p>Через 3–6 месяцев ситуация останется прежней:</p>
+    <p>— те же эмоциональные входы</p>
+    <p>— те же нерегулярные результаты</p>
+    <p>— зависимость от случайных движений рынка</p>
+    <br>
+    <p>
+    Система либо есть, либо её нет.  
+    Рынок не прощает хаос.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="highlight">
+    <h2>Как работает система Grid</h2>
+    <p>Вы задаёте диапазон.</p>
+    <p>Вы рассчитываете уровни.</p>
+    <p>Бот автоматически исполняет стратегию внутри диапазона.</p>
+    <p>Вы контролируете процесс — без постоянного мониторинга.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Что вы получите внутри обучения</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Отбор актива</h3>
+      <p>Как определить подходящий рынок для сетки.</p>
+    </div>
+    <div class="card">
+      <h3>Расчёт диапазона</h3>
+      <p>Правильная логика 70/30 и её адаптация под рынок.</p>
+    </div>
+    <div class="card">
+      <h3>Запуск и контроль</h3>
+      <p>Как мониторить и корректировать стратегию.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;">
+  <h2>Мягкий старт без риска</h2>
+  <p style="color:var(--muted);margin-bottom:20px;">
+  Вы начнёте с тестовой суммы и пройдёте пошаговую модель.  
+  Никакого плеча. Только спот и расчёт.
+  </p>
+  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
+    Перейти в Telegram-бот
+  </a>
+</section>
+
+<div class="footer">
+© 2026 GridLab Academy — образовательный материал. Не является инвестиционной рекомендацией.
 </div>
 
-<script>
-/* FAQ toggle */
-document.querySelectorAll('.faq .q').forEach(q=>{
-  q.addEventListener('click', ()=>{
-    const a = q.nextElementSibling;
-    const open = a.style.display === 'block';
-    document.querySelectorAll('.faq .a').forEach(x=>x.style.display='none');
-    a.style.display = open ? 'none' : 'block';
-  });
-});
-
-/* Lightbox for screenshots (if any) */
-document.querySelectorAll('.screenshot').forEach(img=>{
-  img.addEventListener('click', ()=> {
-    const lb = document.createElement('div');
-    lb.style.position='fixed';lb.style.inset='0';lb.style.display='flex';
-    lb.style.alignItems='center';lb.style.justifyContent='center';lb.style.background='rgba(0,0,0,0.85)';
-    lb.style.zIndex='99999';lb.addEventListener('click', ()=> document.body.removeChild(lb));
-    const im = document.createElement('img'); im.src = img.src; im.style.maxWidth='96%'; im.style.maxHeight='92%'; im.style.borderRadius='12px';
-    lb.appendChild(im); document.body.appendChild(lb);
-  });
-});
-
-/* Popup: show after 12s once per session */
-const popup = document.getElementById('popup');
-const popupClose = document.getElementById('popup-close');
-function showPopup(){ if(sessionStorage.getItem('gridlab_popup_shown')) return; popup.style.display='flex'; popup.setAttribute('aria-hidden','false'); sessionStorage.setItem('gridlab_popup_shown','1'); }
-popupClose.addEventListener('click', ()=> { popup.style.display='none'; popup.setAttribute('aria-hidden','true'); });
-setTimeout(showPopup, 12000);
-
-/* Prevent horizontal scroll on iOS */
-document.addEventListener('touchmove', function(){}, {passive:true});
-</script>
+</div>
 
 </body>
 </html>
