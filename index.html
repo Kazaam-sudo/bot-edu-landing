@@ -1,172 +1,481 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GridLab Academy — Автоматическая настройка Grid-бота</title>
-<link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-<meta name="description" content="Пошаговая настройка Grid-бота для спот-рынка. Система, диапазон 70/30, контроль и масштабирование.">
-<meta property="og:title" content="GridLab Academy — настройка Grid-бота" />
-<meta property="og:description" content="Перейдите от хаотичной торговли к системной автоматизации." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gridlab.academy" />
+<title>GridLab Academy — автоматическая Grid-стратегия</title>
+
+<link rel="icon" href="gridlab_academy_favicon.ico">
+
+<meta name="description" content="Пошаговая настройка Grid-бота для спот-торговли. Диапазон 70/30, уровни, запуск и контроль стратегии.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-  --bg:#ffffff;
-  --text:#0F1115;
-  --muted:#6B7280;
-  --accent:#22C55E;
-  --danger:#ef4444;
-  --border:#E6E9EE;
-  --radius:14px;
-  --shadow:0 12px 32px rgba(15,17,21,0.06);
-  --maxw:1100px;
+--accent:#22C55E;
+--text:#0F1115;
+--muted:#6B7280;
+--border:#E6E9EE;
+--radius:14px;
+--shadow:0 12px 32px rgba(15,17,21,.06);
+--maxw:1100px;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;overflow-x:hidden}
-body{font-family:'Inter',system-ui;background:var(--bg);color:var(--text);line-height:1.55}
-.container{width:94%;max-width:var(--maxw);margin:0 auto;padding:20px 0 80px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo-box{width:52px;height:52px;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+
+body{
+font-family:Inter,system-ui;
+background:#fff;
+color:var(--text);
+line-height:1.55;
+}
+
+.container{
+width:94%;
+max-width:var(--maxw);
+margin:auto;
+padding:20px 0 80px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-box{
+width:52px;
+height:52px;
+border-radius:12px;
+border:1px solid var(--border);
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:var(--shadow);
+}
+
 .logo-box img{width:36px}
-.title{font-weight:800;font-size:18px}
+
+.title{
+font-weight:800;
+font-size:18px;
+}
+
 .title .gl{color:#000}
 .title .ac{color:var(--accent)}
 
 .btn{
-  display:inline-block;
-  padding:14px 24px;
-  border-radius:14px;
-  background:var(--accent);
-  color:#000;
-  font-weight:700;
-  text-decoration:none;
-  box-shadow:0 12px 30px rgba(34,197,94,0.18);
+display:inline-block;
+padding:14px 24px;
+border-radius:14px;
+background:var(--accent);
+color:#000;
+font-weight:700;
+text-decoration:none;
+box-shadow:0 12px 30px rgba(34,197,94,.18);
 }
+
+.hero h1{
+font-size:36px;
+line-height:1.1;
+margin-bottom:16px;
+}
+
+.hero p{
+font-size:18px;
+color:var(--muted);
+margin-bottom:24px;
+}
+
 .section{margin-top:70px}
-.section h2{font-size:28px;margin-bottom:18px}
-.hero h1{font-size:36px;line-height:1.1;margin-bottom:16px}
-.hero p{font-size:18px;color:var(--muted);margin-bottom:24px}
-.stat{font-size:46px;font-weight:800;color:var(--accent);margin-bottom:12px}
-.pain{background:#fff5f5;border:1px solid rgba(239,68,68,0.25);border-radius:var(--radius);padding:30px}
-.future{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:30px}
-.highlight{background:#f7fff9;border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius);padding:30px}
-.cards{display:grid;gap:20px}
-@media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
-.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-.footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
+
+.section h2{
+font-size:28px;
+margin-bottom:20px;
+}
+
+.pain{
+background:#fff5f5;
+border:1px solid rgba(239,68,68,.25);
+border-radius:var(--radius);
+padding:30px;
+}
+
+.stat{
+font-size:46px;
+font-weight:800;
+color:var(--accent);
+margin-bottom:10px;
+}
+
+.future{
+background:#f9fafb;
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:30px;
+}
+
+.highlight{
+background:#f7fff9;
+border:1px solid rgba(34,197,94,.2);
+border-radius:var(--radius);
+padding:30px;
+}
+
+.cards{
+display:grid;
+gap:20px;
+}
+
+@media(min-width:900px){
+.cards{grid-template-columns:repeat(3,1fr)}
+}
+
+.card{
+background:#fff;
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:24px;
+box-shadow:var(--shadow);
+}
+
+.video-wrapper{
+position:relative;
+padding-bottom:56.25%;
+height:0;
+border-radius:var(--radius);
+overflow:hidden;
+box-shadow:var(--shadow);
+}
+
+.video-wrapper iframe{
+position:absolute;
+width:100%;
+height:100%;
+}
+
+.social-proof{
+background:#f7fff9;
+border:1px solid rgba(34,197,94,.2);
+padding:30px;
+border-radius:var(--radius);
+}
+
+.proof-grid{
+display:grid;
+gap:20px;
+margin-top:20px;
+}
+
+@media(min-width:900px){
+.proof-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+.proof{
+text-align:center;
+}
+
+.proof .num{
+font-size:34px;
+font-weight:800;
+color:var(--accent);
+margin-bottom:6px;
+}
+
+.cases{
+display:grid;
+gap:20px;
+margin-top:20px;
+}
+
+@media(min-width:900px){
+.cases{grid-template-columns:repeat(3,1fr)}
+}
+
+.case{
+background:linear-gradient(180deg,#fff,#f7fff9);
+border-radius:var(--radius);
+padding:20px;
+border:1px solid rgba(34,197,94,.1);
+}
+
+.case .name{
+font-weight:700;
+margin-bottom:6px;
+}
+
+.case .meta{
+font-size:13px;
+color:var(--muted);
+margin-bottom:8px;
+}
+
+.footer{
+margin-top:80px;
+padding-top:30px;
+border-top:1px solid var(--border);
+text-align:center;
+color:var(--muted);
+font-size:14px;
+}
+
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
 <header class="header">
-  <div class="brand">
-    <div class="logo-box">
-      <img src="gridlab_academy_favicon.ico" alt="GridLab">
-    </div>
-    <div class="title">
-      <span class="gl">GridLab</span> <span class="ac">Academy</span>
-    </div>
-  </div>
-  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
-    Перейти в Telegram
-  </a>
+<div class="brand">
+<div class="logo-box">
+<img src="gridlab_academy_favicon.ico">
+</div>
+
+<div class="title">
+<span class="gl">GridLab</span>
+<span class="ac">Academy</span>
+</div>
+</div>
+
+<a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
+Начать
+</a>
+
 </header>
 
+
 <section class="hero">
-  <h1>Настройте автоматический Grid-бот и переведите спот-торговлю в системный режим</h1>
-  <p>
-  Без угадывания рынка. Без постоянного сидения у графика.  
-  Пошаговая модель настройки диапазона, уровней и запуска.
-  </p>
-  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
-    Начать настройку
-  </a>
+
+<h1>
+Автоматизируйте спот-торговлю через системную Grid-стратегию
+</h1>
+
+<p>
+Перестаньте угадывать рынок.  
+Научитесь задавать диапазон, рассчитывать уровни и запускать бота,
+который работает по алгоритму.
+</p>
+
+<a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}">
+Начать обучение
+</a>
+
 </section>
+
 
 <section class="section">
-  <div class="pain">
-    <h2>Почему большинство теряет на споте</h2>
-    <p>— Входят импульсивно</p>
-    <p>— Не задают диапазон заранее</p>
-    <p>— Усредняют без расчёта</p>
-    <p>— Работают без системной модели</p>
-    <br>
-    <p><strong>Итог:</strong> результат зависит от эмоций, а не от структуры.</p>
-  </div>
+
+<div class="pain">
+
+<h2>Почему большинство теряет на споте</h2>
+
+<p>— покупают на эмоциях</p>
+<p>— продают в панике</p>
+<p>— усредняют без системы</p>
+<p>— работают без стратегии</p>
+
+<br>
+
+<p><strong>Итог:</strong> результат становится случайным.</p>
+
+</div>
+
 </section>
+
 
 <section class="section">
-  <div class="stat">~70% времени</div>
-  <p>
-  Рынок находится в диапазоне, а не в устойчивом тренде.  
-  Grid-стратегия построена именно под такие фазы.
-  </p>
+
+<div class="stat">~70%</div>
+
+<p>
+Большую часть времени рынок находится в диапазоне.  
+Grid-стратегия как раз работает в этих фазах.
+</p>
+
 </section>
+
 
 <section class="section">
-  <div class="future">
-    <h2>Что будет, если ничего не менять</h2>
-    <p>Через несколько месяцев вы окажетесь в той же точке:</p>
-    <p>— хаотичные сделки</p>
-    <p>— нестабильный результат</p>
-    <p>— зависимость от случайных движений рынка</p>
-    <br>
-    <p>Либо есть система — либо есть хаос.</p>
-  </div>
+
+<div class="future">
+
+<h2>Что будет, если ничего не менять</h2>
+
+<p>Через несколько месяцев всё будет так же:</p>
+
+<p>— те же эмоциональные входы</p>
+<p>— те же нестабильные результаты</p>
+<p>— зависимость от случайного движения цены</p>
+
+<br>
+
+<p>
+Рынок требует системы.
+</p>
+
+</div>
+
 </section>
+
 
 <section class="section">
-  <div class="highlight">
-    <h2>Как работает система</h2>
-    <p>1. Выбирается ликвидный актив.</p>
-    <p>2. Рассчитывается диапазон 70/30.</p>
-    <p>3. Настраивается сетка уровней.</p>
-    <p>4. Бот автоматически исполняет стратегию внутри диапазона.</p>
-    <p>5. Вы контролируете процесс без постоянного мониторинга.</p>
-  </div>
+
+<h2>Как работает стратегия</h2>
+
+<div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" allowfullscreen></iframe>
+</div>
+
 </section>
+
 
 <section class="section">
-  <h2>Что вы получите внутри обучения</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Алгоритм выбора актива</h3>
-      <p>Чёткие критерии отбора для диапазонной работы.</p>
-    </div>
-    <div class="card">
-      <h3>Точный расчёт диапазона</h3>
-      <p>Простая модель 70/30 с проверкой на графике.</p>
-    </div>
-    <div class="card">
-      <h3>Контроль и масштабирование</h3>
-      <p>Как управлять ботом и увеличивать объём постепенно.</p>
-    </div>
-  </div>
+
+<div class="highlight">
+
+<h2>Как работает Grid-бот</h2>
+
+<p>Вы задаёте диапазон.</p>
+<p>Вы рассчитываете уровни.</p>
+<p>Бот автоматически исполняет стратегию внутри диапазона.</p>
+<p>Вы контролируете процесс без постоянного мониторинга.</p>
+
+</div>
+
 </section>
 
-<section class="section" style="text-align:center;">
-  <h2>Мягкий старт без лишнего риска</h2>
-  <p style="color:var(--muted);margin-bottom:20px;">
-  Начните с тестовой суммы и пройдите модель пошагово.  
-  Только спот, без плеча. Контроль на каждом этапе.
-  </p>
-  <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank">
-    Перейти в Telegram-бот
-  </a>
+
+<section class="section">
+
+<h2>Что вы получите внутри обучения</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Алгоритм выбора актива</h3>
+<p>Чёткие критерии отбора для диапазонной стратегии.</p>
+</div>
+
+<div class="card">
+<h3>Расчёт диапазона</h3>
+<p>Простая модель 70/30 с проверкой на графике.</p>
+</div>
+
+<div class="card">
+<h3>Контроль стратегии</h3>
+<p>Как управлять ботом и масштабировать результат.</p>
+</div>
+
+</div>
+
 </section>
+
+
+<section class="section">
+
+<div class="social-proof">
+
+<h2>Социальное доказательство</h2>
+
+<p>
+Системный подход используют тысячи трейдеров по всему миру.
+</p>
+
+<div class="proof-grid">
+
+<div class="proof">
+<div class="num">10 000+</div>
+<p>настроенных Grid-ботов на крупных биржах</p>
+</div>
+
+<div class="proof">
+<div class="num">70%</div>
+<p>времени рынок находится в диапазоне</p>
+</div>
+
+<div class="proof">
+<div class="num">24/7</div>
+<p>бот работает без вашего участия</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>Отзывы участников</h2>
+
+<div class="cases">
+
+<div class="case">
+<div class="name">José Martínez</div>
+<div class="meta">Monterrey</div>
+<div>
+Раньше пытался торговать вручную.  
+После настройки бота стало спокойнее — стратегия работает сама.
+</div>
+</div>
+
+<div class="case">
+<div class="name">Mariana López</div>
+<div class="meta">Guadalajara</div>
+<div>
+Всё объясняется по шагам.  
+Начала с небольшой суммы и постепенно разобралась.
+</div>
+</div>
+
+<div class="case">
+<div class="name">Carlos Herrera</div>
+<div class="meta">CDMX</div>
+<div>
+Самое полезное — логика диапазона.  
+Теперь понимаю где стратегия работает.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" style="text-align:center">
+
+<h2>Начните с тестовой суммы</h2>
+
+<p style="color:var(--muted);margin-bottom:20px">
+
+Вы получите пошаговую модель настройки и сможете протестировать стратегию на практике.
+
+</p>
+
+<a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}">
+Перейти в Telegram-бот
+</a>
+
+</section>
+
 
 <div class="footer">
 © 2026 GridLab Academy — образовательный материал. Не является инвестиционной рекомендацией.
 </div>
 
 </div>
+
 </body>
 </html>
