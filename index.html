@@ -1,401 +1,405 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GridLab Academy — Автоматическая Grid-стратегия</title>
-<link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GridLab Academy — Запуск Grid Bot через Telegram</title>
+  <link rel="icon" type="image/x-icon" href="gridlab_academy_favicon.ico">
 
-<meta name="description" content="Пошаговая настройка Grid-бота для спот-торговли. Диапазон 70/30, уровни, запуск и контроль стратегии.">
-<meta property="og:title" content="GridLab Academy — настройка Grid-бота" />
-<meta property="og:description" content="Перейдите от хаотичной торговли к системной автоматизации." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gridlab.academy" />
-<meta property="og:image" content="screenshot1.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
+  <meta name="description" content="GridLab Academy — структурный запуск Grid Bot через Telegram: выбор монеты, диапазона и системы управления без хаоса и типичных ошибок новичков.">
+  <meta property="og:title" content="GridLab Academy — запуск Grid Bot через Telegram" />
+  <meta property="og:description" content="Продуманный вход в Telegram-бота: разбор стратегии, структуры и доступа к обучению внутри GridLab Academy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gridlab.academy" />
+  <meta property="og:image" content="screenshot1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#ffffff;
-  --text:#0F1115;
-  --muted:#6B7280;
-  --accent:#22C55E;
-  --accent-dark:#16a34a;
-  --danger:#ef4444;
-  --border:#E6E9EE;
-  --radius:14px;
-  --shadow:0 12px 32px rgba(15,17,21,0.06);
-  --maxw:1100px;
-}
-
-/* Reset & base */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;overflow-x:hidden;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.55}
-
-/* Container */
-.container{width:94%;max-width:var(--maxw);margin:0 auto;padding:20px 0 90px}
-
-/* Header */
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo-box{width:52px;height:52px;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);background:#fff}
-.logo-box img{width:36px;height:36px;object-fit:contain}
-.title{font-weight:800;font-size:18px}
-.title .gl{color:#000}
-.title .ac{color:var(--accent)}
-.cta {display:flex;gap:12px;align-items:center}
-
-/* Buttons */
-.btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--accent);color:#000;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(34,197,94,0.15)}
-.btn.secondary{background:#fff;border:1px solid var(--border);color:var(--text);padding:10px 14px;font-weight:600}
-.btn.ghost{background:transparent;border:1px dashed var(--border);color:var(--muted);padding:9px 12px}
-
-/* Hero */
-.hero{padding:8px 0 6px}
-.hero h1{font-size:34px;line-height:1.06;margin-bottom:12px}
-.hero p{color:var(--muted);font-size:16px;margin-bottom:18px}
-
-/* Sections */
-.section{margin-top:54px}
-.section h2{font-size:24px;margin-bottom:12px}
-.divider{height:4px;width:72px;background:var(--accent);border-radius:6px;margin:10px 0 18px}
-
-/* Pain / future / highlight boxes */
-.pain{background:#fff5f5;border:1px solid rgba(239,68,68,0.18);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
-.future{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:22px}
-.highlight{background:#f7fff9;border:1px solid rgba(34,197,94,0.18);border-radius:var(--radius);padding:22px}
-
-/* Stat */
-.stat{font-size:42px;font-weight:800;color:var(--accent);margin-bottom:8px}
-
-/* Video */
-.video-wrapper{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
-.video-wrapper iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
-
-/* Cards grid */
-.cards{display:grid;gap:16px}
-@media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
-.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
-
-/* Social proof */
-.social-proof{background:#fff;border-radius:12px;padding:18px;border:1px solid rgba(34,197,94,0.08);box-shadow:0 8px 24px rgba(34,197,94,0.05)}
-.proof-grid{display:grid;gap:12px}
-@media(min-width:900px){.proof-grid{grid-template-columns:repeat(3,1fr)}}
-.proof{padding:12px;text-align:center}
-.proof .num{font-size:32px;font-weight:800;color:var(--accent);margin-bottom:6px}
-.proof p{color:var(--muted);font-size:14px}
-
-/* Testimonials / cases */
-.cases{display:grid;gap:12px}
-@media(min-width:900px){.cases{grid-template-columns:repeat(3,1fr)}}
-.case{background:linear-gradient(180deg,#fff,#f7fff9);border-radius:12px;padding:16px;border:1px solid rgba(34,197,94,0.08);box-shadow:0 10px 28px rgba(34,197,94,0.06)}
-.case .name{font-weight:700;margin-bottom:6px}
-.case .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
-.case .quote{font-size:15px;color:#0f1724}
-
-/* Final CTA area */
-.cta-final{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px}
-
-/* Footer */
-.footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
-
-/* Sticky CTA (mobile) */
-.sticky-cta{
-  display:none; /* visible only on mobile via media query */
-  position:fixed;
-  left:50%;
-  bottom:12px;
-  transform:translateX(-50%);
-  z-index:99999;
-  width:calc(100% - 36px);
-  max-width:760px;
-  border-radius:14px;
-  box-shadow:0 18px 40px rgba(2,6,23,0.16);
-  background:linear-gradient(90deg,var(--accent),var(--accent-dark));
-  color:#000;
-  padding:12px 16px;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.sticky-cta .cta-left{display:flex;align-items:center;gap:12px}
-.sticky-cta .cta-left .icon{font-size:20px}
-.sticky-cta .cta-right{display:flex;gap:8px;align-items:center}
-.sticky-cta .close{background:transparent;border:0;color:rgba(0,0,0,0.6);font-weight:700;font-size:16px;cursor:pointer}
-
-/* Pulse animation */
-@keyframes pulse {
-  0% { box-shadow: 0 8px 22px rgba(34,197,94,0.18); transform:translateY(0); }
-  50% { box-shadow: 0 18px 40px rgba(34,197,94,0.28); transform:translateY(-3px); }
-  100% { box-shadow: 0 8px 22px rgba(34,197,94,0.18); transform:translateY(0); }
-}
-.sticky-cta.pulse { animation: pulse 1.6s infinite; }
-
-/* Make sticky visible on small screens */
-@media(max-width:780px){
-  .sticky-cta{display:flex}
-  .header .cta{display:none} /* hide header CTAs to save space on mobile */
-}
-
-/* Minor responsive tweaks */
-@media(max-width:480px){
-  .hero h1{font-size:20px}
-  .section h2{font-size:18px}
-  .stat{font-size:32px}
-  .btn{padding:10px 12px;border-radius:12px}
-}
-</style>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f1115;
+      --muted: #667085;
+      --line: #e7ebf0;
+      --soft: #f8fafc;
+      --soft-green: #f3fff7;
+      --accent: #22C55E;
+      --accent-dark: #16a34a;
+      --danger-bg: #fff5f5;
+      --danger-line: rgba(239, 68, 68, 0.18);
+      --shadow: 0 12px 32px rgba(15,17,21,.06);
+      --radius: 16px;
+      --maxw: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    a { color: inherit; }
+    .container { width: min(94%, var(--maxw)); margin: 0 auto; }
+    .section { padding: 56px 0 0; }
+    .section h2 { font-size: clamp(26px, 4vw, 40px); line-height: 1.08; margin-bottom: 10px; }
+    .section p.lead { color: var(--muted); max-width: 760px; font-size: 17px; }
+    .divider { width: 78px; height: 4px; background: var(--accent); border-radius: 999px; margin: 16px 0 22px; }
+    .header { padding: 18px 0 8px; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-box { width: 52px; height: 52px; border-radius: 14px; border: 1px solid var(--line); display: grid; place-items: center; background: #fff; box-shadow: var(--shadow); }
+    .logo-box img { width: 36px; height: 36px; object-fit: contain; }
+    .brand-title { font-size: 19px; font-weight: 800; }
+    .brand-title .black { color: #111; }
+    .brand-title .green { color: var(--accent); }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 18px; border-radius: 14px; text-decoration: none; font-weight: 700; border: 1px solid transparent; transition: .2s ease; }
+    .btn-primary { background: var(--accent); color: #09110d; box-shadow: 0 12px 28px rgba(34,197,94,.18); }
+    .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+    .btn-secondary { background: #fff; border-color: var(--line); color: var(--text); }
+    .btn-secondary:hover { background: #f8fafc; }
+    .hero { padding: 34px 0 18px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
+    .hero h1 { font-size: clamp(34px, 6vw, 62px); line-height: .98; margin-bottom: 18px; max-width: 900px; }
+    .hero .sub { color: var(--muted); font-size: 18px; max-width: 760px; margin-bottom: 20px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .badge { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: #fff; font-size: 14px; color: #334155; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-card { background: linear-gradient(180deg, #fff, #f8fff9); border: 1px solid rgba(34,197,94,.18); border-radius: 22px; padding: 22px; box-shadow: var(--shadow); }
+    .hero-card h3 { font-size: 19px; margin-bottom: 10px; }
+    .hero-card p { color: var(--muted); margin-bottom: 14px; }
+    .hero-list { display: grid; gap: 10px; }
+    .hero-list div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 13px; font-size: 14px; }
+    .trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+    .trust-item { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
+    .trust-item strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .trust-item span { color: var(--muted); font-size: 14px; }
+    .pain-box { background: var(--danger-bg); border: 1px solid var(--danger-line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .pain-grid, .three-grid, .two-grid, .faq-grid, .proof-grid, .story-grid { display: grid; gap: 16px; }
+    .pain-grid { grid-template-columns: repeat(2, 1fr); margin-top: 18px; }
+    .three-grid { grid-template-columns: repeat(3, 1fr); }
+    .two-grid { grid-template-columns: repeat(2, 1fr); }
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid, .story-grid { grid-template-columns: repeat(3, 1fr); }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .card h3 { margin-bottom: 8px; font-size: 20px; }
+    .card p { color: var(--muted); }
+    .soft-card { background: var(--soft); border-color: var(--line); }
+    .green-card { background: var(--soft-green); border-color: rgba(34,197,94,.18); }
+    .list { display: grid; gap: 8px; margin-top: 14px; }
+    .list div { color: #334155; }
+    .quote { font-size: 15px; color: #0f172a; }
+    .story { background: linear-gradient(180deg, #fff, #f8fff9); border: 1px solid rgba(34,197,94,.16); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .story .name { font-weight: 700; margin-bottom: 4px; }
+    .story .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 10px; }
+    .price-card { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); }
+    .price-card.recommended { border-color: rgba(34,197,94,.35); box-shadow: 0 18px 38px rgba(34,197,94,.12); }
+    .ribbon { position: absolute; top: 14px; right: 14px; background: var(--accent); color: #08120c; font-weight: 800; font-size: 12px; border-radius: 999px; padding: 6px 10px; }
+    .price-card .price { font-size: 34px; font-weight: 800; margin: 8px 0 12px; }
+    .faq-item { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
+    .faq-item h3 { margin-bottom: 8px; font-size: 18px; }
+    .faq-item p { color: var(--muted); }
+    .final-box { background: linear-gradient(180deg, #fff, #f7fff8); border: 1px solid rgba(34,197,94,.18); border-radius: 22px; padding: 28px; text-align: center; box-shadow: var(--shadow); }
+    .final-box p { color: var(--muted); max-width: 800px; margin: 0 auto 16px; }
+    .footer { padding: 56px 0 90px; text-align: center; color: var(--muted); font-size: 14px; }
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      left: 50%; bottom: 12px; transform: translateX(-50%);
+      width: calc(100% - 28px); max-width: 760px;
+      z-index: 99999;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      color: #08120c; border-radius: 16px; padding: 12px 14px;
+      box-shadow: 0 20px 44px rgba(15,17,21,.18);
+      align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .sticky-left { display: flex; gap: 12px; align-items: center; }
+    .sticky-title { font-weight: 800; }
+    .sticky-sub { font-size: 12px; opacity: .75; }
+    .sticky-close { background: transparent; border: none; color: rgba(0,0,0,.55); font-size: 18px; font-weight: 700; cursor: pointer; }
+    @media (max-width: 980px) {
+      .hero-grid, .trust-strip, .pain-grid, .three-grid, .two-grid, .faq-grid, .proof-grid, .story-grid, .pricing { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 780px) {
+      .header-cta { display: none; }
+      .sticky-cta { display: flex; }
+      .section { padding-top: 44px; }
+      .hero { padding-top: 22px; }
+      .hero h1 { font-size: 34px; }
+      .hero .sub { font-size: 16px; }
+    }
+  </style>
 </head>
 <body>
-
-<div class="container" id="page">
-
-  <!-- Header -->
-  <header class="header" role="banner">
-    <div class="brand" aria-hidden="false">
-      <div class="logo-box" aria-hidden="true">
-        <img src="gridlab_academy_favicon.ico" alt="GridLab logo">
+  <div class="container">
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="#top">
+          <div class="logo-box">
+            <img src="gridlab_academy_favicon.ico" alt="GridLab Academy" />
+          </div>
+          <div class="brand-title"><span class="black">GridLab</span> <span class="green">Academy</span></div>
+        </a>
+        <div class="header-cta">
+          <a class="btn btn-secondary" href="#plans">Смотреть планы</a>
+          <a class="btn btn-primary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Открыть Telegram-бот</a>
+        </div>
       </div>
+    </header>
+
+    <section class="hero section" id="top">
+      <div class="hero-grid">
+        <div>
+          <h1>Запусти Grid Bot через Telegram с нормальной системой, а не наугад</h1>
+          <p class="sub">GridLab Academy — это не страница с хаотичным туториалом, а понятный вход в Telegram-бота, где ты выбираешь биржу, получаешь структуру запуска, обучение и доступ к материалам внутри одной воронки.</p>
+          <div class="badge-row">
+            <div class="badge">✅ Обучение внутри Telegram</div>
+            <div class="badge">⭐️ Оплата через Telegram Stars</div>
+            <div class="badge">📈 Форматы Start / Pro / VIP</div>
+            <div class="badge">🧭 Фокус на структуру, а не на хаос</div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в бота</a>
+            <a class="btn btn-secondary" href="#how-it-works">Как это работает</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Что происходит после клика</h3>
+          <p>Ты не попадаешь в перегруженный курс или на холодную страницу оплаты. Сначала бот проводит тебя по понятному пути и показывает, что именно тебе подходит.</p>
+          <div class="hero-list">
+            <div><strong>1.</strong> Выбираешь биржу или сразу идёшь к планам</div>
+            <div><strong>2.</strong> Смотришь, какой формат тебе подходит по глубине</div>
+            <div><strong>3.</strong> Получаешь доступ к обучению и каналам внутри Telegram</div>
+            <div><strong>4.</strong> Возвращаешься в любой момент через «Ya pagué / Recuperar acceso»</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Почему этот формат вызывает больше доверия</h2>
+      <div class="divider"></div>
+      <div class="trust-strip">
+        <div class="trust-item"><strong>Telegram-first</strong><span>Путь пользователя простой: бот, оплата, доступ, поддержка — без лишних слоёв.</span></div>
+        <div class="trust-item"><strong>Структурно</strong><span>Вместо хаотичных советов — логика выбора пары, диапазона и настройки.</span></div>
+        <div class="trust-item"><strong>Практично</strong><span>Фокус на запуске и понимании механики, а не на перегрузе теорией.</span></div>
+        <div class="trust-item"><strong>Без лишней возни</strong><span>Есть восстановление доступа, поддержка и понятная воронка внутри бота.</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>С чем обычно сталкивается человек до GridLab</h2>
+      <div class="divider"></div>
+      <div class="pain-box">
+        <p><strong>Чаще всего проблема не в самой стратегии, а в хаосе вокруг неё.</strong></p>
+        <div class="pain-grid">
+          <div class="card soft-card"><h3>Непонятно, с чего начать</h3><p>Биржи, пары, диапазоны, настройки, пресеты — человек теряется ещё до запуска.</p></div>
+          <div class="card soft-card"><h3>Слишком много шумных советов</h3><p>Вместо системы — десятки мнений, которые мешают понять базовую механику.</p></div>
+          <div class="card soft-card"><h3>Страх ошибиться на старте</h3><p>Человек не уверен, где диапазон нормальный, а где уже потенциальная ошибка.</p></div>
+          <div class="card soft-card"><h3>Нет ощущения структуры</h3><p>Даже если стратегия интересна, запуск без системы превращается в угадайку.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Почему большинство проигрывает на споте, даже не доходя до стабильной системы</h2>
+      <div class="divider"></div>
+      <div class="three-grid">
+        <div class="card"><h3>Путают стратегию и эмоции</h3><p>Открывают сделки и ботов не по механике, а по ощущению момента.</p></div>
+        <div class="card"><h3>Смотрят только на монету</h3><p>Игнорируют диапазон, фазу рынка, волатильность и логику самого сетапа.</p></div>
+        <div class="card"><h3>Запускают без системы управления</h3><p>Без правил входа, без структуры риска, без понимания, где стратегия вообще уместна.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Почему вообще существует Grid-стратегия</h2>
+      <div class="divider"></div>
+      <div class="card green-card">
+        <p>Grid-стратегия существует не для того, чтобы “волшебно решить всё”, а чтобы системно работать в условиях, где цена двигается внутри диапазона, а не летит идеально по прямой. Она нужна там, где хаос можно превратить в структуру.</p>
+        <div class="list">
+          <div>• вместо гадания — уровни и логика сетки</div>
+          <div>• вместо хаотичного входа — заранее рассчитанный диапазон</div>
+          <div>• вместо постоянного ручного дёргания — алгоритм управления</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Когда Grid работает лучше всего</h2>
+      <div class="divider"></div>
+      <div class="two-grid">
+        <div class="card"><h3>Рынок в диапазоне</h3><p>Когда актив не в импульсном разлёте, а в понятной боковой или контролируемой фазе.</p></div>
+        <div class="card"><h3>Есть дисциплина по выбору диапазона</h3><p>Когда ты не просто “включаешь бота”, а понимаешь, где границы движения и почему они выбраны.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Когда Grid работает хуже</h2>
+      <div class="divider"></div>
+      <div class="two-grid">
+        <div class="card soft-card"><h3>Сильный тренд без пауз</h3><p>Если рынок резко вырывается из диапазона, сетка без подготовки начинает работать хуже.</p></div>
+        <div class="card soft-card"><h3>Плохой выбор актива и диапазона</h3><p>Стратегия не спасает, если исходная структура выбрана неправильно.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <h2>Как работает вся система</h2>
+      <div class="divider"></div>
+      <div class="three-grid">
+        <div class="card"><h3>1. Выбираем биржу</h3><p>В боте уже собраны основные варианты, чтобы не бегать по разным ссылкам и не собирать всё вручную.</p></div>
+        <div class="card"><h3>2. Выбираем формат обучения</h3><p>Start, Pro или VIP — в зависимости от того, нужен ли тебе быстрый старт, полная система или персональная поддержка.</p></div>
+        <div class="card"><h3>3. Получаем доступ и идём по структуре</h3><p>Оплата происходит внутри Telegram, после чего ты получаешь доступ к нужным материалам и каналам.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Как мы выбираем монету</h2>
+      <div class="divider"></div>
+      <div class="card">
+        <p>Не по хайпу и не по “все обсуждают”. Выбор актива строится вокруг более понятной структуры:</p>
+        <div class="list">
+          <div>• где ликвидность и как актив ведёт себя в диапазоне</div>
+          <div>• насколько актив подходит именно под Grid, а не под чистый импульс</div>
+          <div>• насколько его поведение можно читать через диапазоны, а не через эмоциональные выбросы</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Как мы выбираем диапазон</h2>
+      <div class="divider"></div>
+      <div class="card">
+        <p>Именно диапазон чаще всего отличает нормальный запуск от ошибки. Внутри обучения разбор идёт не на уровне “поставь вот так”, а на уровне логики: где границы, почему они выбраны, и что делает диапазон рабочим именно для этой стратегии.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Почему 70/30 модель</h2>
+      <div class="divider"></div>
+      <div class="card green-card">
+        <p>Потому что хорошая система — это не только вход. Часто сильный результат даёт комбинация более стабильного базового сценария и меньшей доли под более активные решения. Такая модель помогает не перегружать всё в одну идею и не превращать управление в хаос.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Почему обучение всё равно нужно</h2>
+      <div class="divider"></div>
+      <div class="three-grid">
+        <div class="card"><h3>Бот не заменяет понимание</h3><p>Он упрощает вход, но не отменяет того, что нужно понимать механику.</p></div>
+        <div class="card"><h3>Ошибка в основе = плохой запуск</h3><p>Если человек выбирает пару или диапазон без логики, сам бот не спасёт.</p></div>
+        <div class="card"><h3>Структура экономит месяцы хаоса</h3><p>Нормальная система чаще даёт прогресс быстрее, чем бессвязный поиск по чатам и роликам.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Что человек получает внутри бота</h2>
+      <div class="divider"></div>
+      <div class="two-grid">
+        <div class="card"><h3>Внутри Start</h3><p>Быстрый вход в механику, чек-лист безопасного старта, первая структура настройки и понимание логики Grid без перегруза.</p></div>
+        <div class="card"><h3>Внутри Pro</h3><p>Полная система Grid Trading, логика выбора диапазона, TradingView, пресеты, типичные ошибки и более сильная рабочая база.</p></div>
+        <div class="card"><h3>Внутри VIP</h3><p>Персональная поддержка, разбор конфигураций, диапазонов и более быстрый проход без типичных провалов новичка.</p></div>
+        <div class="card"><h3>Плюс удобный доступ</h3><p>Восстановление доступа, Telegram-каналы, поддержка и понятный сценарий возврата, если ты вернулся позже.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Кому это подходит — и кому нет</h2>
+      <div class="divider"></div>
+      <div class="two-grid">
+        <div class="card green-card"><h3>Подходит, если:</h3><div class="list"><div>• хочешь запускаться структурно, а не наугад</div><div>• тебе нужен понятный Telegram-first путь</div><div>• хочешь разбираться в механике, а не просто копировать кнопки</div></div></div>
+        <div class="card soft-card"><h3>Не подходит, если:</h3><div class="list"><div>• ищешь мгновенные обещания результата</div><div>• не хочешь разбираться в логике выбора актива и диапазона</div><div>• нужен “волшебный бот”, который всё решит без тебя</div></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Истории и кейсы, которые вызывают доверие</h2>
+      <div class="divider"></div>
+      <div class="story-grid">
+        <div class="story"><div class="name">Carlos, CDMX</div><div class="meta">До этого запускал хаотично</div><div class="quote">“Самое полезное было не в ‘секретной кнопке’, а в том, что я наконец понял, как выбирать диапазон и почему раньше запускал бота мимо рынка.”</div></div>
+        <div class="story"><div class="name">Mariana, Guadalajara</div><div class="meta">Нужна была структура</div><div class="quote">“До этого был перегруз информацией. Здесь зашло именно то, что путь внутри Telegram простой и без ощущения, что тебя бросили разбираться самой.”</div></div>
+        <div class="story"><div class="name">José, Monterrey</div><div class="meta">Искал понятный старт</div><div class="quote">“Мне понравилось, что это не просто контент ради контента. Видно, что здесь есть система: от выбора биржи до самой настройки.”</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Социальное подтверждение без перегиба</h2>
+      <div class="divider"></div>
+      <div class="proof-grid">
+        <div class="card"><h3>Telegram-first воронка</h3><p>Люди не теряются между лендингом, оплатой, доступами и поддержкой — всё собрано ближе к реальному пути пользователя.</p></div>
+        <div class="card"><h3>Ясные форматы входа</h3><p>Start, Pro и VIP закрывают разные уровни глубины, а не сваливают всех в один перегруженный сценарий.</p></div>
+        <div class="card"><h3>Опора на структуру</h3><p>Контент и бот построены не как “просто информация”, а как конверсионная и рабочая система запуска.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>FAQ</h2>
+      <div class="divider"></div>
+      <div class="faq-grid">
+        <div class="faq-item"><h3>Это для новичков?</h3><p>Да, если тебе нужен понятный путь без перегруза и с акцентом на механику запуска.</p></div>
+        <div class="faq-item"><h3>Где всё происходит?</h3><p>Основной путь — внутри Telegram: бот, оплата через Stars, доступы, поддержка, материалы.</p></div>
+        <div class="faq-item"><h3>Если я уже оплатил раньше?</h3><p>Внутри бота есть отдельный блок для восстановления доступа, так что не нужно искать старые сообщения вручную.</p></div>
+        <div class="faq-item"><h3>Это подходит, если я уже зарегистрирован на бирже?</h3><p>Да. Можно сразу перейти к планам и выбрать нужный формат обучения.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Если коротко: зачем идти в бота прямо сейчас</h2>
+      <div class="divider"></div>
+      <div class="final-box">
+        <p>Если тебе нужен не очередной шумный “обзор стратегии”, а понятный маршрут запуска Grid Bot, то следующий логичный шаг — открыть Telegram-бота, посмотреть планы и выбрать формат, который подходит именно тебе.</p>
+        <a class="btn btn-primary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Открыть GridLab Bot</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Сильный финальный CTA</h2>
+      <div class="divider"></div>
+      <div class="final-box">
+        <p>Бот уже собран так, чтобы провести тебя от интереса к нормальному входу: выбрать биржу, показать формат обучения, объяснить механику и дать доступ внутри Telegram.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <a class="btn btn-primary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в Telegram-бот</a>
+          <a class="btn btn-secondary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Посмотреть планы в боте</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">© 2026 <strong>GridLab Academy</strong> — образовательный материал. Не является инвестиционной рекомендацией.</footer>
+  </div>
+
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-left">
+      <div>🚀</div>
       <div>
-        <div class="title"><span class="gl">GridLab</span> <span class="ac">Academy</span></div>
+        <div class="sticky-title">Открыть Telegram-бот</div>
+        <div class="sticky-sub">Выбор биржи, планы и доступы внутри Telegram</div>
       </div>
     </div>
-
-    <nav class="cta" role="navigation" aria-label="Главные действия">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Начать</a>
-      <a class="btn secondary" href="#video">Посмотреть видео</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">Автоматизируйте спот-торговлю через системную Grid-стратегию</h1>
-    <p>Перестаньте угадывать рынок. Научитесь задавать диапазон, рассчитывать уровни и запускать бота, который торгует по правилу — без постоянного контроля.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-      <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в бот</a>
-      <a class="btn secondary" href="#instruction">Коротко: шаги</a>
-    </div>
-  </section>
-
-  <!-- Why people lose -->
-  <section class="section" aria-labelledby="why-title">
-    <h2 id="why-title">Почему большинство теряет на споте</h2>
-    <div class="pain" role="region" aria-label="Проблемы трейдеров">
-      <p>— Покупают на эмоциях в пике</p>
-      <p>— Продают в панике на откате</p>
-      <p>— Усредняют без расчёта</p>
-      <p>— Нет системного подхода</p>
-      <br>
-      <p><strong>Итог:</strong> результат случайный, а не системный.</p>
-    </div>
-  </section>
-
-  <!-- Stat -->
-  <section class="section" aria-labelledby="stat-title">
-    <div id="stat-title" style="display:none">Статистика</div>
-    <div class="stat" aria-hidden="false">~70%</div>
-    <p>Значительную часть времени активы находятся в диапазоне — это зона, где сеточная стратегия показывает стабильность.</p>
-  </section>
-
-  <!-- Future if nothing changes -->
-  <section class="section" aria-labelledby="future-title">
-    <h2 id="future-title">Что будет, если ничего не менять</h2>
-    <div class="future" role="region" aria-label="Последствия">
-      <p>Через несколько месяцев — те же эмоциональные входы, те же нестабильные результаты и зависимость от случайных движений рынка.</p>
-      <p>Рынок не прощает хаос. Система — единственный способ перейти от случайности к дисциплине.</p>
-    </div>
-  </section>
-
-  <!-- Video -->
-  <section id="video" class="section" aria-labelledby="video-title">
-    <h2 id="video-title">Короткая видео-инструкция</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <div class="video-wrapper" role="region" aria-label="Видео инструкция">
-      <iframe src="https://www.youtube.com/embed/NZD_Mb6aquo" title="Инструкция Grid" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="instruction" class="section" aria-labelledby="how-title">
-    <h2 id="how-title">Как работает стратегия — 4 ключевых шага</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="cards" style="margin-top:8px">
-      <div class="card">
-        <h3>1. Отбор актива</h3>
-        <p>Краткие критерии: топ-пары, объём, недавний откат или боковик.</p>
-      </div>
-      <div class="card">
-        <h3>2. Расчёт диапазона</h3>
-        <p>Принцип 70% вниз / 30% вверх от точки входа — простая проверяемая логика.</p>
-      </div>
-      <div class="card">
-        <h3>3. Уровни и шаг</h3>
-        <p>Рекомендуем 20–40 уровней, шаг = (Upper − Lower) / levels; проверяем min order.</p>
-      </div>
-      <div class="card">
-        <h3>4. Запуск и контроль</h3>
-        <p>Бот исполняет покупки/продажи по сетке — вы контролируете работу и корректируете при необходимости.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- What you get -->
-  <section class="section" aria-labelledby="what-get">
-    <h2 id="what-get">Что вы получите внутри обучения</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <div class="cards" style="margin-top:8px">
-      <div class="card"><h3>Чек-лист отбора пар</h3><p>Короткие инструкции по выбору подходящих активов.</p></div>
-      <div class="card"><h3>Калькулятор диапазона</h3><p>Готовая формула и примеры расчёта 70/30.</p></div>
-      <div class="card"><h3>Шаблоны действий</h3><p>Что делать в первые 24–72 часа и при выходе за границы.</p></div>
-    </div>
-  </section>
-
-  <!-- Social proof -->
-  <section class="section" aria-labelledby="proof-title">
-    <h2 id="proof-title">Социальное доказательство</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="social-proof" role="region" aria-label="Доказательства">
-      <p>Тысячи трейдеров используют системный подход — это не «хаос», а проверенный рабочий алгоритм.</p>
-      <div class="proof-grid" style="margin-top:12px">
-        <div class="proof"><div class="num">10 000+</div><p>настроенных Grid-ботов (оценка по интеграциям)</p></div>
-        <div class="proof"><div class="num">70%</div><p>времени рынок в диапазоне — зона эффективности сетки</p></div>
-        <div class="proof"><div class="num">24/7</div><p>бот работает без вашего постоянного контроля</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section" aria-labelledby="cases-title">
-    <h2 id="cases-title">Отзывы участников</h2>
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="cases" role="list">
-      <div class="case" role="listitem">
-        <div class="name">José Martínez</div>
-        <div class="meta">Monterrey</div>
-        <div class="quote">Раньше торговал вручную и постоянно нервничал. После запуска бота стало спокойнее — стратегия работает сама.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Mariana López</div>
-        <div class="meta">Guadalajara</div>
-        <div class="quote">Всё по шагам, без воды. Начала с небольшой суммы, поняла механику и расширила.</div>
-      </div>
-
-      <div class="case" role="listitem">
-        <div class="name">Carlos Herrera</div>
-        <div class="meta">CDMX</div>
-        <div class="quote">Больше всего помогла логика диапазона — теперь понимаю, где сетка работает, а где — нет.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pre-offer & CTA -->
-  <section class="section" aria-labelledby="start-title" style="text-align:center">
-    <h2 id="start-title">Начните с тестовой суммы — без плеча</h2>
-    <p style="color:var(--muted);margin-bottom:14px">Пройдите пошаговый модуль в боте: чек-лист, калькулятор и готовые шаблоны для запуска.</p>
-    <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в Telegram-бот</a>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    © 2026 <strong>GridLab Academy</strong> — образовательный материал. Не является инвестиционной рекомендацией.
-  </footer>
-
-</div>
-
-<!-- Sticky CTA (mobile) -->
-<div class="sticky-cta" id="stickyCta" role="region" aria-label="Кнопка перейти в бот">
-  <div class="cta-left">
-    <div class="icon" aria-hidden="true">🚀</div>
-    <div>
-      <div style="font-weight:700">Перейти в Telegram</div>
-      <div style="font-size:12px;color:rgba(0,0,0,0.7)">Чек-лист + быстрый модуль</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <a class="btn btn-primary" style="padding:10px 12px;box-shadow:none;" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Открыть</a>
+      <button class="sticky-close" id="stickyClose">✕</button>
     </div>
   </div>
-  <div class="cta-right">
-    <a class="btn" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener" style="padding:10px 12px;border-radius:10px;box-shadow:none">Открыть</a>
-    <button class="close" id="stickyClose" aria-label="Закрыть">✕</button>
-  </div>
-</div>
 
-<script>
-(function(){
-  const sticky = document.getElementById('stickyCta');
-  const closeBtn = document.getElementById('stickyClose');
-  const mobileMax = 780;
-  const shownKey = 'gridlab_sticky_closed_v1';
-
-  function isMobile() {
-    return window.innerWidth <= mobileMax;
-  }
-
-  function showSticky(pulse=true){
-    if(!isMobile()) return;
-    if(sessionStorage.getItem(shownKey)) return;
-    sticky.classList.add('pulse');
-    sticky.style.opacity = '0';
-    sticky.style.transform += ' translateY(6px)';
-    // small show fade in
-    requestAnimationFrame(()=> {
-      sticky.style.transition = 'opacity .28s ease, transform .28s ease';
-      sticky.style.opacity = '1';
-      sticky.style.transform = sticky.style.transform.replace(' translateY(6px)','');
-    });
-    // stop pulsing after some time to avoid annoyance
-    if(pulse){
-      setTimeout(()=> sticky.classList.remove('pulse'), 8000);
-    }
-  }
-
-  // show on scroll > 20% OR after 2.5s whichever first
-  let shownByScroll = false;
-  function onScroll(){
-    if(shownByScroll) return;
-    const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    const winH = window.innerHeight;
-    const scrollY = window.scrollY || window.pageYOffset;
-    const scrolledPercent = (scrollY / (docH - winH)) * 100;
-    if(scrolledPercent > 20){
-      shownByScroll = true;
-      showSticky();
-    }
-  }
-
-  // close handler
-  closeBtn.addEventListener('click', ()=>{
-    sticky.style.display = 'none';
-    sessionStorage.setItem(shownKey, '1');
-  });
-
-  // initial timers
-  window.addEventListener('load', ()=>{
-    if(isMobile() && !sessionStorage.getItem(shownKey)){
-      // show after delay
-      setTimeout(()=> showSticky(true), 2500);
-      // also listen to scroll
-      window.addEventListener('scroll', onScroll, {passive:true});
-      // on resize, remove if not mobile
-      window.addEventListener('resize', ()=> {
-        if(!isMobile()) sticky.style.display = 'none';
+  <script>
+    (function(){
+      const sticky = document.getElementById('stickyCta');
+      const closeBtn = document.getElementById('stickyClose');
+      const mobileMax = 780;
+      const hiddenKey = 'gridlab_sticky_closed_v3';
+      function isMobile(){ return window.innerWidth <= mobileMax; }
+      function showSticky(){
+        if(!isMobile()) return;
+        if(sessionStorage.getItem(hiddenKey)) return;
+        sticky.style.display = 'flex';
+      }
+      closeBtn.addEventListener('click', () => {
+        sticky.style.display = 'none';
+        sessionStorage.setItem(hiddenKey, '1');
       });
-    }
-  });
-
-  // accessibility: close on Escape
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && sticky.style.display !== 'none'){
-      sticky.style.display = 'none';
-      sessionStorage.setItem(shownKey, '1');
-    }
-  });
-})();
-</script>
-
+      window.addEventListener('load', () => {
+        if (isMobile() && !sessionStorage.getItem(hiddenKey)) {
+          setTimeout(showSticky, 2200);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
