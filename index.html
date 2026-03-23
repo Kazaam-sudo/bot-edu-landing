@@ -115,6 +115,37 @@
     .sticky-title { font-weight: 800; }
     .sticky-sub { font-size: 12px; opacity: .75; }
     .sticky-close { background: transparent; border: none; color: rgba(0,0,0,.55); font-size: 18px; font-weight: 700; cursor: pointer; }
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 17, 21, 0.52);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 100000;
+    }
+    .popup-overlay.show { display: flex; }
+    .popup-card {
+      width: min(100%, 460px);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 24px 64px rgba(15,17,21,.18);
+    }
+    .popup-card h3 { font-size: 24px; line-height: 1.08; margin-bottom: 10px; }
+    .popup-card p { color: var(--muted); margin-bottom: 16px; }
+    .popup-note {
+      background: var(--soft-green);
+      border: 1px solid rgba(34,197,94,.18);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: #166534;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .popup-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     @media (max-width: 980px) {
       .hero-grid, .trust-strip, .pain-grid, .three-grid, .two-grid, .faq-grid, .proof-grid, .story-grid, .pricing { grid-template-columns: 1fr; }
     }
@@ -378,26 +409,60 @@
     </div>
   </div>
 
+  <div class="popup-overlay" id="delayedPopup" aria-hidden="true">
+    <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+      <h3 id="popupTitle">Хочешь пройти путь через бота без лишней возни?</h3>
+      <p>Если тема тебе откликается, не обязательно дочитывать всё до конца. В Telegram-боте уже есть планы, логика входа и следующий шаг без хаоса.</p>
+      <div class="popup-note">Откроется бот GridLab Academy с планами и доступом внутри Telegram.</div>
+      <div class="popup-actions">
+        <a class="btn btn-primary" href="https://t.me/gridlab_academy_bot?start={clickid}" target="_blank" rel="noopener">Перейти в Telegram-бот</a>
+        <button class="btn btn-secondary" id="popupClose" type="button">Пока посмотрю сайт</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function(){
       const sticky = document.getElementById('stickyCta');
       const closeBtn = document.getElementById('stickyClose');
+      const popup = document.getElementById('delayedPopup');
+      const popupClose = document.getElementById('popupClose');
       const mobileMax = 780;
       const hiddenKey = 'gridlab_sticky_closed_v3';
+      const popupSeenKey = 'gridlab_popup_seen_v1';
+      const popupDelayMs = 30000;
       function isMobile(){ return window.innerWidth <= mobileMax; }
       function showSticky(){
         if(!isMobile()) return;
         if(sessionStorage.getItem(hiddenKey)) return;
         sticky.style.display = 'flex';
       }
+      function showPopup(){
+        if (sessionStorage.getItem(popupSeenKey)) return;
+        popup.classList.add('show');
+        popup.setAttribute('aria-hidden', 'false');
+      }
+      function hidePopup(){
+        popup.classList.remove('show');
+        popup.setAttribute('aria-hidden', 'true');
+        sessionStorage.setItem(popupSeenKey, '1');
+      }
       closeBtn.addEventListener('click', () => {
         sticky.style.display = 'none';
         sessionStorage.setItem(hiddenKey, '1');
+      });
+      popupClose.addEventListener('click', hidePopup);
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) hidePopup();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popup.classList.contains('show')) hidePopup();
       });
       window.addEventListener('load', () => {
         if (isMobile() && !sessionStorage.getItem(hiddenKey)) {
           setTimeout(showSticky, 2200);
         }
+        setTimeout(showPopup, popupDelayMs);
       });
     })();
   </script>
