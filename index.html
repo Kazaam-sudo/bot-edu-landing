@@ -540,12 +540,12 @@
           safePart(params.get('lang'), 'es', 2),
           safePart(source, 'direct', 8),
           safePart(medium, 'organic', 7),
-          safePart(params.get('utm_campaign'), 'evergreen', 8),
+          safePart(params.get('utm_campaign'), 'evergreen', 9),
           'landing',
           clickId(),
         ];
         document.querySelectorAll('.js-bot-link').forEach((link) => {
-          const content = safePart(link.dataset.cta, 'landing', 8);
+          const content = safePart(link.dataset.cta, 'landing', 12);
           const token = [...tokenParts.slice(0, 6), content, tokenParts[7]].join('_');
           link.href = `${botBase}${token}`;
           link.dataset.startToken = token;
