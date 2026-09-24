@@ -152,7 +152,7 @@
       const click = clickId(params);
       document.querySelectorAll('.js-bot-link').forEach(link => {
         const content = safePart(link.dataset.cta, 'landing', 10);
-        const token = ['gl1', video, 'en', safePart(source,'direct',7), safePart(medium,'organic',6), campaign, content, click].join('_');
+        const token = ['gl1', video, 'en', safePart(source,'direct',7), safePart(medium,'organic',7), campaign, content, click].join('_');
         if (token.length > 64) throw new Error('GridLab start payload exceeds Telegram limit');
         link.href = botBase + token;
         link.dataset.startToken = token;
