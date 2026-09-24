@@ -148,7 +148,7 @@
       const source = params.get('utm_source') || (referrer.includes('youtube.com') || referrer.includes('youtu.be') ? 'youtube' : 'direct');
       const medium = params.get('utm_medium') || 'organic';
       const video = safePart(params.get('video_id'), 'direct', 11);
-      const campaign = safePart(params.get('utm_campaign'), 'evergreen', 8);
+      const campaign = safePart(params.get('utm_campaign'), 'evergreen', 9);
       const click = clickId(params);
       document.querySelectorAll('.js-bot-link').forEach(link => {
         const content = safePart(link.dataset.cta, 'landing', 10);
