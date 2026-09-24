@@ -30,12 +30,12 @@ gl1_GL-V01_en_youtube_organic_GL-V01_hero-primary_a1b2c3d4
 | `video_id` | Video / content identifier; `direct` if absent | 11 |
 | `lang` | Landing language | 2 |
 | `source` | UTM source or YouTube referrer fallback | 7 |
-| `medium` | UTM medium or `organic` | 6 |
-| `campaign` | UTM campaign or `evergreen` | 8 |
+| `medium` | UTM medium or `organic` | 7 |
+| `campaign` | UTM campaign or `evergreen` | 9 |
 | `content` | CTA placement | 10 |
 | `click_id` | Supplied id or per-session random id | 8 |
 
-All values are restricted to ASCII letters, digits, and hyphens, so the complete payload stays below Telegram's 64-character start-parameter limit. Underscores are reserved as separators. No email, username, or other personal data is put in the payload.
+All values are restricted to ASCII letters, digits, and hyphens, so the complete payload stays within Telegram's 64-character start-parameter limit. Underscores are reserved as separators. No email, username, or other personal data is put in the payload.
 
 ## Bot-side requirement before calling this operational
 
