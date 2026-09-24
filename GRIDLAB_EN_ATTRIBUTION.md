@@ -21,7 +21,7 @@ gl1_{video_id}_{lang}_{source}_{medium}_{campaign}_{content}_{click_id}
 Example:
 
 ```
-gl1_GL-V01_en_youtube_organic_GL-V01_hero-primary_a1b2c3d4
+gl1_GL-V01_en_youtube_organic_GL-V01_hero-prima_a1b2c3d4
 ```
 
 | Field | Meaning | Maximum |
